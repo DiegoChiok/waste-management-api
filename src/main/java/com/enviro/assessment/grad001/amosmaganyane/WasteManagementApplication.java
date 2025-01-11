@@ -1,7 +1,11 @@
 package com.enviro.assessment.grad001.amosmaganyane;
 
-public class Main {
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+
+@SpringBootApplication
+public class WasteManagementApplication {
     public static void main(String[] args) {
-        System.out.println("Hello world!");
+        SpringApplication.run(WasteManagementApplication.class, args);
     }
 }
