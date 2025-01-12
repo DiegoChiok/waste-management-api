@@ -1,15 +1,32 @@
 package com.enviro.assessment.grad001.amosmaganyane.models;
 
+import jakarta.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
+// Represents a waste category with its associated recycling tips and disposal guidelines
+@Entity
+@Table(name = "waste_categories")
 public class WasteCategory {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private final Long id;
+
+    // Name is required as it identifies the category type
+    @Column(nullable = false)
     private final String name;
+
+    @Column
     private final String description;
-    private final List<RecyclingTip> recyclingTips;
-    private final List<DisposalGuideline> guidelines;
+
+    // One category can have multiple recycling tips
+    @OneToMany(mappedBy = "category", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<RecyclingTip> recyclingTips;
+
+    // One category can have multiple disposal guidelines
+    @OneToMany(mappedBy = "category", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<DisposalGuideline> guidelines;
 
     public WasteCategory(Long id, String name, String description){
         this.id = id;
@@ -37,6 +54,14 @@ public class WasteCategory {
 
     public List<DisposalGuideline> getGuidelines(){
         return List.copyOf(guidelines);
+    }
+
+    public void addRecyclingTip(RecyclingTip tip) {
+        recyclingTips.add(tip);
+    }
+
+    public void addGuideline(DisposalGuideline guideline) {
+        guidelines.add(guideline);
     }
 
     @Override
