@@ -84,4 +84,14 @@ public class WasteCategoryController {
         }
     }
 
+    @GetMapping("/search")
+    public ResponseEntity<List<WasteCategoryDTO>> searchCategories(
+            @RequestParam(required = false) String keyword) {
+        List<WasteCategoryDTO> categoryDTOs = categoryService.searchCategories(keyword)
+                .stream()
+                .map(WasteCategoryDTO::fromEntity)
+                .collect(Collectors.toList());
+        return new ResponseEntity<>(categoryDTOs, HttpStatus.OK);
+    }
+
 }

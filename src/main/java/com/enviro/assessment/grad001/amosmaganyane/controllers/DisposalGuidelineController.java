@@ -29,7 +29,7 @@ public class DisposalGuidelineController {
                     null,
                     guidelineDTO.getTitle(),
                     guidelineDTO.getInstructions(),
-                    null  // Category will be set by service
+                    null
             );
 
             DisposalGuideline created = guidelineService.createGuideline(categoryId, guideline);
@@ -70,7 +70,7 @@ public class DisposalGuidelineController {
                     id,
                     guidelineDTO.getTitle(),
                     guidelineDTO.getInstructions(),
-                    null  // Category will be preserved by service
+                    null
             );
 
             DisposalGuideline updated = guidelineService.updateGuideline(id, guideline);

@@ -103,4 +103,17 @@ class WasteCategoryControllerTest {
                 .andExpect(status().isNoContent());
     }
 
+    @Test
+    void testSearchCategories() throws Exception {
+        String keyword = "Recyclable";
+        List<WasteCategory> searchResults = List.of(testCategory);
+        when(categoryService.searchCategories(keyword)).thenReturn(searchResults);
+
+        mockMvc.perform(get("/wastemanagementapi/categories/search")
+                        .param("keyword", keyword))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.length()").value(1))
+                .andExpect(jsonPath("$[0].name").value("Recyclable"));
+    }
+
 }
