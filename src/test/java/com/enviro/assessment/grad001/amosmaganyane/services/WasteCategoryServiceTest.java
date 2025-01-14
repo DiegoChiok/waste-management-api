@@ -58,7 +58,8 @@ class WasteCategoryServiceTest {
     void testGetCategoryById(){
         Long id = 1L;
         WasteCategory category = new WasteCategory(id, "Recyclable", "Description");
-        when(wasteCategoryRepository.findById(id)).thenReturn(Optional.of(category));
+        when(wasteCategoryRepository.findById(id))
+                .thenReturn(Optional.of(category));
 
         Optional<WasteCategory> found = service.getCategoryById(id);
 
@@ -72,7 +73,8 @@ class WasteCategoryServiceTest {
     @Test
     void shouldReturnEmptyWhenCategoryNotFound() {
         Long id = 1L;
-        when(wasteCategoryRepository.findById(id)).thenReturn(Optional.empty());
+        when(wasteCategoryRepository.findById(id))
+                .thenReturn(Optional.empty());
 
         Optional<WasteCategory> found = service.getCategoryById(id);
 
