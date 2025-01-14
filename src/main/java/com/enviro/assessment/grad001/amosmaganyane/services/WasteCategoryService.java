@@ -1,5 +1,7 @@
 package com.enviro.assessment.grad001.amosmaganyane.services;
 
+import com.enviro.assessment.grad001.amosmaganyane.models.DisposalGuideline;
+import com.enviro.assessment.grad001.amosmaganyane.models.RecyclingTip;
 import com.enviro.assessment.grad001.amosmaganyane.models.WasteCategory;
 import java.util.List;
 import java.util.Optional;
@@ -74,5 +76,7 @@ public interface WasteCategoryService {
      */
     boolean isValidCategoryName(String name);
 
-
+    // Guidelines and Tips Management
+    List<DisposalGuideline> getGuidelinesForCategory(Long categoryId);
+    List<RecyclingTip> getRecyclingTipsForCategory(Long categoryId);
 }

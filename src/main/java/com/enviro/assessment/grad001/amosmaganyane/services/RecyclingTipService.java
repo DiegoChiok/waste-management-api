@@ -58,4 +58,8 @@ public interface RecyclingTipService {
      * @return true if the content is valid, false otherwise
      */
     boolean isValidTipContent(String content);
+
+    // Business operations
+    List<RecyclingTip> getTipsByCategory(Long categoryId);
+    List<RecyclingTip> searchTips(String keyword);
 }

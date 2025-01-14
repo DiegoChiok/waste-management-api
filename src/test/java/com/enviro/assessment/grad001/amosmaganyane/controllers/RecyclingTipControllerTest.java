@@ -119,4 +119,16 @@ class RecyclingTipControllerTest {
                 .andExpect(status().isNoContent());
     }
 
+    @Test
+    void shouldGetTipsByCategory() throws Exception {
+        List<RecyclingTip> tips = List.of(testTip);
+        when(tipService.getTipsByCategory(1L)).thenReturn(tips);
+
+        mockMvc.perform(get("/wastemanagementapi/categories/1/tips"))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.length()").value(1))
+                .andExpect(jsonPath("$[0].title").value("Paper Recycling"));
+    }
+
+
 }

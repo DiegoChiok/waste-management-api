@@ -52,7 +52,19 @@ public class RecyclingTipController {
                 .orElse(new ResponseEntity<>(HttpStatus.NOT_FOUND));
     }
 
-
+    @GetMapping("/categories/{categoryId}/tips")
+    public ResponseEntity<List<RecyclingTipDTO>> getTipsByCategory(
+            @PathVariable Long categoryId) {
+        try {
+            List<RecyclingTipDTO> tipDTOs = tipService.getTipsByCategory(categoryId)
+                    .stream()
+                    .map(RecyclingTipDTO::fromEntity)
+                    .collect(Collectors.toList());
+            return new ResponseEntity<>(tipDTOs, HttpStatus.OK);
+        } catch (IllegalArgumentException e) {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+    }
 
     @GetMapping("/tips")
     public ResponseEntity<List<RecyclingTipDTO>> getAllTips() {

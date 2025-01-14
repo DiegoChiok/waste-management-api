@@ -99,4 +99,20 @@ public class RecyclingTipServiceImpl implements RecyclingTipService {
                 && content.length() >= 10
                 && content.length() <= 500;
     }
+
+
+    @Override
+    public List<RecyclingTip> getTipsByCategory(Long categoryId) {
+        return categoryRepository.findById(categoryId)
+                .map(WasteCategory::getRecyclingTips)
+                .orElseThrow(() -> new IllegalArgumentException("Category not found"));
+    }
+
+    @Override
+    public List<RecyclingTip> searchTips(String keyword) {
+        if (keyword == null || keyword.trim().isEmpty()) {
+            return getAllTips();
+        }
+        return tipRepository.findByTitleContainingIgnoreCase(keyword);
+    }
 }

@@ -1,5 +1,7 @@
 package com.enviro.assessment.grad001.amosmaganyane.services;
 
+import com.enviro.assessment.grad001.amosmaganyane.models.DisposalGuideline;
+import com.enviro.assessment.grad001.amosmaganyane.models.RecyclingTip;
 import com.enviro.assessment.grad001.amosmaganyane.models.WasteCategory;
 import com.enviro.assessment.grad001.amosmaganyane.repositories.WasteCategoryRepository;
 
@@ -104,4 +106,20 @@ public class WasteCategoryServiceImpl implements WasteCategoryService {
                 && name.length() >= 3
                 && name.length() <= 50;
     }
+
+    @Override
+    public List<DisposalGuideline> getGuidelinesForCategory(Long categoryId) {
+        return repository.findById(categoryId)
+                .map(WasteCategory::getGuidelines)
+                .orElse(List.of());
+    }
+
+    @Override
+    public List<RecyclingTip> getRecyclingTipsForCategory(Long categoryId) {
+        return repository.findById(categoryId)
+                .map(WasteCategory::getRecyclingTips)
+                .orElse(List.of());
+    }
+
+
 }
