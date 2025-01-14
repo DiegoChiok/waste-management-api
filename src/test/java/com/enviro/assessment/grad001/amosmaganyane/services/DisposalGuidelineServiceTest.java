@@ -11,11 +11,12 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
+
+import java.util.List;
 import java.util.Optional;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
 
 /**
  * Unit tests for DisposalGuidelineService.
@@ -119,4 +120,63 @@ class DisposalGuidelineServiceTest {
         verify(guidelineRepository).save(any(DisposalGuideline.class));
     }
 
+    @Test
+    void testSearchGuidelinesSuccessfully() {
+        String keyword = "battery";
+        List<DisposalGuideline> expectedGuidelines = List.of(
+                new DisposalGuideline(1L, "Battery Disposal",
+                        "Detailed instructions for battery disposal", testCategory)
+        );
+        when(guidelineRepository.findByTitleContainingIgnoreCase(keyword))
+                .thenReturn(expectedGuidelines);
+
+        List<DisposalGuideline> results = service.searchGuidelines(keyword);
+
+        assertFalse(results.isEmpty());
+        assertEquals(1, results.size());
+        assertTrue(results.get(0).getTitle().toLowerCase().contains(keyword));
+    }
+
+    @Test
+    void testValidateGuidelineInstructions() {
+        String validInstructions = "These are proper disposal instructions that provide " +
+                "detailed steps for waste handling and safety precautions.";
+        assertTrue(service.isValidGuidelineInstructions(validInstructions));
+
+        assertFalse(service.isValidGuidelineInstructions("Too short"));
+        assertFalse(service.isValidGuidelineInstructions(""));
+        assertFalse(service.isValidGuidelineInstructions(null));
+    }
+
+    @Test
+    void testGetGuidelinesByCategory() {
+        Long categoryId = 1L;
+        WasteCategory mockCategory = mock(WasteCategory.class);
+        List<DisposalGuideline> expectedGuidelines = List.of(
+                new DisposalGuideline(1L, "Guideline 1",
+                        "Detailed instructions for guideline 1", mockCategory),
+                new DisposalGuideline(2L, "Guideline 2",
+                        "Detailed instructions for guideline 2", mockCategory)
+        );
+
+        when(categoryRepository.findById(categoryId))
+                .thenReturn(Optional.of(mockCategory));
+        when(mockCategory.getGuidelines()).thenReturn(expectedGuidelines);
+
+        List<DisposalGuideline> results = service.getGuidelinesByCategory(categoryId);
+
+        assertEquals(2, results.size());
+        verify(categoryRepository).findById(categoryId);
+    }
+
+    @Test
+    void testHandleEmptySearchResults() {
+        String nonExistentKeyword = "nonexistent";
+        when(guidelineRepository.findByTitleContainingIgnoreCase(nonExistentKeyword))
+                .thenReturn(List.of());
+
+        List<DisposalGuideline> results = service.searchGuidelines(nonExistentKeyword);
+
+        assertTrue(results.isEmpty());
+    }
 }

@@ -122,4 +122,14 @@ class DisposalGuidelineControllerTest {
                 .andExpect(status().isNoContent());
     }
 
+    @Test
+    void shouldGetGuidelinesByCategory() throws Exception {
+        List<DisposalGuideline> guidelines = List.of(testGuideline);
+        when(guidelineService.getGuidelinesByCategory(1L)).thenReturn(guidelines);
+
+        mockMvc.perform(get("/wastemanagementapi/categories/1/guidelines"))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.length()").value(1))
+                .andExpect(jsonPath("$[0].title").value("Battery Disposal"));
+    }
 }

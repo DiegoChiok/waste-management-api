@@ -101,4 +101,19 @@ public class DisposalGuidelineServiceImpl implements DisposalGuidelineService {
                 && instructions.length() <= 1000;
     }
 
+    @Override
+    public List<DisposalGuideline> getGuidelinesByCategory(Long categoryId) {
+        return categoryRepository.findById(categoryId)
+                .map(WasteCategory::getGuidelines)
+                .orElseThrow(() -> new IllegalArgumentException("Category not found"));
+    }
+
+    @Override
+    public List<DisposalGuideline> searchGuidelines(String keyword) {
+        if (keyword == null || keyword.trim().isEmpty()) {
+            return getAllGuidelines();
+        }
+        return guidelineRepository.findByTitleContainingIgnoreCase(keyword);
+    }
+
 }

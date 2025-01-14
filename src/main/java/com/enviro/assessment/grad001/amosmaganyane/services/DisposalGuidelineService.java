@@ -58,4 +58,8 @@ public interface DisposalGuidelineService {
      */
     boolean isValidGuidelineInstructions(String instructions);
 
+    // Business operations
+    List<DisposalGuideline> getGuidelinesByCategory(Long categoryId);
+    List<DisposalGuideline> searchGuidelines(String keyword);
+
 }

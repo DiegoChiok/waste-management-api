@@ -52,6 +52,21 @@ public class DisposalGuidelineController {
                 .orElse(new ResponseEntity<>(HttpStatus.NOT_FOUND));
     }
 
+    @GetMapping("/categories/{categoryId}/guidelines")
+    public ResponseEntity<List<DisposalGuidelineDTO>> getGuidelinesByCategory(
+            @PathVariable Long categoryId) {
+        try {
+            List<DisposalGuidelineDTO> guidelineDTOs = guidelineService
+                    .getGuidelinesByCategory(categoryId)
+                    .stream()
+                    .map(DisposalGuidelineDTO::fromEntity)
+                    .collect(Collectors.toList());
+            return new ResponseEntity<>(guidelineDTOs, HttpStatus.OK);
+        } catch (IllegalArgumentException e) {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+    }
+
     @GetMapping("/guidelines")
     public ResponseEntity<List<DisposalGuidelineDTO>> getAllGuidelines() {
         List<DisposalGuidelineDTO> guidelineDTOs = guidelineService.getAllGuidelines()
