@@ -95,6 +95,9 @@ class RecyclingTipServiceTest {
                 () -> service.createTip(nonExistentCategoryId, tip));
     }
 
+    /**
+     * Verifies if an existing tip can be updated successfully.
+     */
     @Test
     void testUpdateTipSuccessfully() {
         Long tipId = 1L;
