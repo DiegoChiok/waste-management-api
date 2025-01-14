@@ -9,6 +9,7 @@ import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 
+import java.util.List;
 import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -80,4 +81,63 @@ class WasteCategoryServiceTest {
 
         assertTrue(found.isEmpty());
     }
+
+    /**
+     * Verifies that duplicate category names are detected and prevented.
+     */
+    @Test
+    void shouldPreventDuplicateCategoryNames() {
+        String existingName = "Recyclable";
+        when(wasteCategoryRepository.existsByNameIgnoreCase(existingName)).thenReturn(true);
+
+        boolean isUnique = service.isCategoryNameUnique(existingName);
+
+        assertFalse(isUnique);
+    }
+
+
+    /**
+     * Verifies various formats for category names.
+     */
+    @Test
+    void shouldValidateCategoryNameFormat() {
+        assertFalse(service.isValidCategoryName("A"));
+        assertFalse(service.isValidCategoryName("   "));
+        assertTrue(service.isValidCategoryName("Recyclable Waste"));
+        assertFalse(service.isValidCategoryName("Too Long Category Name " +
+                "That Exceeds The Maximum Allowed Length"));
+    }
+
+    /**
+     * Verifies cases where a search returns no results are well handled.
+     */
+    @Test
+    void shouldHandleEmptySearchResults() {
+        String nonExistentKeyword = "NonExistent";
+        when(wasteCategoryRepository.findByNameContainingIgnoreCase(nonExistentKeyword))
+                .thenReturn(List.of());
+
+        List<WasteCategory> results = service.searchCategories(nonExistentKeyword);
+
+        assertTrue(results.isEmpty());
+    }
+
+    /**
+     * Verifies that all categories are returned when the search keyword is null.
+     */
+    @Test
+    void shouldHandleNullSearchKeyword() {
+        List<WasteCategory> allCategories = List.of(
+                new WasteCategory(1L, "Recyclable", "Description"),
+                new WasteCategory(2L, "Organic", "Description")
+        );
+
+        when(wasteCategoryRepository.findAll()).thenReturn(allCategories);
+
+        List<WasteCategory> results = service.searchCategories(null);
+
+        assertFalse(results.isEmpty());
+        assertEquals(2, results.size());
+    }
+
 }

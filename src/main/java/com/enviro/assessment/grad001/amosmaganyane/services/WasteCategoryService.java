@@ -46,4 +46,33 @@ public interface WasteCategoryService {
      * @param id the ID of the category to delete
      */
     void deleteCategory(Long id);
+
+    // Business operations
+    // Manage categories
+
+    /**
+     * Checks if a category name is unique (case-insensitive).
+     *
+     * @param name the name to check
+     * @return true if the name is unique, false otherwise
+     */
+    boolean isCategoryNameUnique(String name);
+
+    /**
+     * Searches for categories matching the given keyword.
+     *
+     * @param keyword the search keyword
+     * @return a list of matching WasteCategory objects
+     */
+    List<WasteCategory> searchCategories(String keyword);
+
+    /**
+     * Validates the format of a category name.
+     *
+     * @param name the name to validate
+     * @return true if the name is valid, false otherwise
+     */
+    boolean isValidCategoryName(String name);
+
+
 }
