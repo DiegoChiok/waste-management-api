@@ -246,7 +246,7 @@ DELETE /wastemanagementapi/categories/{id}
 ```
 
 
-####Search Categories
+#### Search Categories
 
 ```
 GET /wastemanagementapi/categories/search?keyword={keyword}
@@ -316,6 +316,37 @@ PUT /wastemanagementapi/tips/{id}
 }
 ```
 
+### Search Recycling Tips
+
+```http
+GET /wastemanagementapi/tips/search?keyword={keyword}
+```
+Query Parameters:
+- `keyword` (optional): Search term for tip titles
+
+Response Example:
+
+```json
+[
+  {
+    "id": 1,
+    "title": "Paper Recycling",
+    "content": "How to recycle paper properly",
+    "categoryId": 1,
+    "categoryName": "Recyclable Materials"
+  },
+  {
+    "id": 2,
+    "title": "Newspaper Recycling",
+    "content": "Best practices for newspaper recycling",
+    "categoryId": 1,
+    "categoryName": "Recyclable Materials"
+  }
+]
+```
+
+Note: If no keyword is provided or if keyword is empty all tips will be returned.
+
 ### Disposal Guidelines API
 
 #### Get Guidelines for Category
@@ -368,6 +399,36 @@ PUT /wastemanagementapi/guidelines/{id}
 }
 ```
 
+### Search Disposal Guidelines
+
+```http
+GET /wastemanagementapi/guidelines/search?keyword={keyword}
+```
+Query Parameters:
+- `keyword` (optional): Search term for guideline titles
+Response Example:
+
+```json
+[
+  {
+    "id": 1,
+    "title": "Battery Disposal",
+    "instructions": "Take to designated collection points",
+    "categoryId": 2,
+    "categoryName": "Hazardous Waste"
+  },
+  {
+    "id": 2,
+    "title": "Car Battery Disposal",
+    "instructions": "Return to automotive stores for proper disposal",
+    "categoryId": 2,
+    "categoryName": "Hazardous Waste"
+  }
+]
+
+```
+Note: If no keyword is provided or if keyword is empty all guidelines will be returned.
+
 ## Error Handling
 The API uses standard HTTP status codes:
 
@@ -378,17 +439,6 @@ The API uses standard HTTP status codes:
 - 404: Not Found
 - 500: Internal Server Error
 
-  
-Error Response Format:
-
-```json
-{
-  "status": "error",
-  "message": "Error description",
-  "timestamp": "2025-01-15T10:15:30Z",
-  "path": "/api/categories/999"
-}
-```
 
 #### Features
 
