@@ -130,6 +130,10 @@ class DisposalGuidelineServiceTest {
         verify(guidelineRepository).save(any(DisposalGuideline.class));
     }
 
+    /**
+     * Tests that a guideline update fails when the guideline doesn't exist.
+     * Verifies that the service throws IllegalStateException and never calls save.
+     */
     @Test
     void testUpdateGuidelineNotFound() {
         Long nonExistentId = 999L;
@@ -145,6 +149,10 @@ class DisposalGuidelineServiceTest {
         verify(guidelineRepository, never()).save(any());
     }
 
+    /**
+     * Tests the search functionality with a matching keyword.
+     * Verifies that the search returns guidelines with titles containing the keyword.
+     */
     @Test
     void testSearchGuidelinesSuccessfully() {
         String keyword = "battery";
@@ -162,6 +170,10 @@ class DisposalGuidelineServiceTest {
         assertTrue(results.get(0).getTitle().toLowerCase().contains(keyword));
     }
 
+    /**
+     * Tests the validation of guideline instructions.
+     * Verifies that instructions meet length requirements and aren't null or empty.
+     */
     @Test
     void testValidateGuidelineInstructions() {
         String validInstructions = "These are proper disposal instructions that provide " +
@@ -173,6 +185,10 @@ class DisposalGuidelineServiceTest {
         assertFalse(service.isValidGuidelineInstructions(null));
     }
 
+    /**
+     * Tests retrieval of guidelines for a specific category.
+     * Verifies that all guidelines associated with the category are returned.
+     */
     @Test
     void testGetGuidelinesByCategory() {
         Long categoryId = 1L;
@@ -194,6 +210,10 @@ class DisposalGuidelineServiceTest {
         verify(categoryRepository).findById(categoryId);
     }
 
+    /**
+     * Tests search functionality when no matches are found.
+     * Verifies that an empty list is returned for non-existent keywords.
+     */
     @Test
     void testHandleEmptySearchResults() {
         String nonExistentKeyword = "nonexistent";
@@ -205,6 +225,10 @@ class DisposalGuidelineServiceTest {
         assertTrue(results.isEmpty());
     }
 
+    /**
+     * Tests the counting of guidelines in a category.
+     * Verifies that the correct count of guidelines is returned for a category.
+     */
     @Test
     void testCountGuidelinesInCategory() {
         Long categoryId = 1L;
@@ -225,6 +249,10 @@ class DisposalGuidelineServiceTest {
         assertEquals(2, count);
     }
 
+    /**
+     * Tests search functionality with a specific keyword.
+     * Verifies that search is case-insensitive and returns matching guidelines.
+     */
     @Test
     void testSearchGuidelinesWithKeyword() {
         String keyword = "battery";
@@ -242,6 +270,10 @@ class DisposalGuidelineServiceTest {
         verify(guidelineRepository).findByTitleContainingIgnoreCase(keyword);
     }
 
+    /**
+     * Tests search functionality with an empty keyword.
+     * Verifies that all guidelines are returned when search term is empty.
+     */
     @Test
     void testSearchGuidelinesWithEmptyKeyword() {
         List<DisposalGuideline> allGuidelines = List.of(

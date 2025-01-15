@@ -17,6 +17,9 @@ class WasteCategoryRepositoryTest {
     @Autowired
     private WasteCategoryRepository repository;
 
+    /**
+     * Tests saving and retrieving a waste category with basic attributes.
+     */
     @Test
     void testSaveAndRetrieveWasteCategory() {
         WasteCategory category = new WasteCategory(null, "Recyclable",
@@ -28,6 +31,9 @@ class WasteCategoryRepositoryTest {
         assertEquals("Recyclable", saved.getName());
     }
 
+    /**
+     * Tests successful deletion of a waste category from the database.
+     */
     @Test
     void testDeleteWasteCategory() {
         WasteCategory category = new WasteCategory(null, "Recyclable",
@@ -39,6 +45,9 @@ class WasteCategoryRepositoryTest {
         assertFalse(repository.findById(saved.getId()).isPresent());
     }
 
+    /**
+     * Tests updating an existing waste category's properties.
+     */
     @Test
     void testUpdateWasteCategory() {
         WasteCategory category = new WasteCategory(null, "Recyclable",
@@ -55,6 +64,9 @@ class WasteCategoryRepositoryTest {
         assertEquals("Updated description", found.getDescription());
     }
 
+    /**
+     * Tests case-insensitive search functionality for category names.
+     */
     @Test
     void testFindByNameContainingIgnoreCase() {
         WasteCategory category = new WasteCategory(null, "Recyclable",
@@ -70,6 +82,9 @@ class WasteCategoryRepositoryTest {
         assertTrue(notFound.isEmpty());
     }
 
+    /**
+     * Tests case-insensitive existence check for category names.
+     */
     @Test
     void testCheckExistsByNameIgnoreCase() {
         WasteCategory category = new WasteCategory(null, "Recyclable",

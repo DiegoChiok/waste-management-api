@@ -16,6 +16,9 @@ class DisposalGuidelineRepositoryTest {
     @Autowired
     private WasteCategoryRepository categoryRepository;
 
+    /**
+     * Tests saving and retrieving a disposal guideline with its category relationship.
+     */
     @Test
     void shouldSaveAndRetrieveDisposalGuideline() {
         WasteCategory category = categoryRepository.save(
@@ -31,6 +34,9 @@ class DisposalGuidelineRepositoryTest {
         assertEquals("Paper Disposal", saved.getTitle());
     }
 
+    /**
+     * Verifies successful deletion of a disposal guideline from the database.
+     */
     @Test
     void shouldDeleteDisposalGuideline() {
         WasteCategory category = categoryRepository.save(

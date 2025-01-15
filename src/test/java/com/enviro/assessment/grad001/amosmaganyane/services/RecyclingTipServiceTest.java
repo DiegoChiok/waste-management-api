@@ -123,6 +123,10 @@ class RecyclingTipServiceTest {
         verify(tipRepository).save(any(RecyclingTip.class));
     }
 
+    /**
+     * Tests that a tip update fails when the tip doesn't exist.
+     * Verifies that the service throws IllegalStateException and never calls save.
+     */
     @Test
     void testUpdateTipNotFound() {
         Long nonExistentId = 999L;
@@ -137,6 +141,10 @@ class RecyclingTipServiceTest {
         verify(tipRepository, never()).save(any());
     }
 
+    /**
+     * Tests the search functionality for recycling tips with a matching keyword.
+     * Verifies that the search returns tips with titles containing the keyword.
+     */
     @Test
     void shouldSearchTipsSuccessfully() {
         String keyword = "paper";
@@ -154,6 +162,10 @@ class RecyclingTipServiceTest {
         assertTrue(results.get(0).getTitle().toLowerCase().contains(keyword));
     }
 
+    /**
+     * Tests the validation of tip content.
+     * Verifies that content meets length requirements and isn't null or empty.
+     */
     @Test
     void testValidateTipContent() {
         assertTrue(service.isValidTipContent(
@@ -163,6 +175,10 @@ class RecyclingTipServiceTest {
         assertFalse(service.isValidTipContent(null));
     }
 
+    /**
+     * Tests retrieval of recycling tips for a specific category.
+     * Verifies that all tips associated with the category are returned correctly.
+     */
     @Test
     void testGetTipsByCategory() {
         Long categoryId = 1L;
@@ -184,6 +200,10 @@ class RecyclingTipServiceTest {
         verify(mockCategory).getRecyclingTips();
     }
 
+    /**
+     * Tests the counting of recycling tips in a category.
+     * Verifies that the correct count of tips is returned for a specific category.
+     */
     @Test
     void testCountRecyclingTipsInCategory() {
         Long categoryId = 1L;
@@ -204,6 +224,10 @@ class RecyclingTipServiceTest {
         assertEquals(2, count);
     }
 
+    /**
+     * Tests search functionality with a specific keyword.
+     * Verifies that search is case-insensitive and returns tips with matching titles.
+     */
     @Test
     void testSearchTipsWithKeyword() {
         String keyword = "paper";
@@ -220,6 +244,10 @@ class RecyclingTipServiceTest {
         verify(tipRepository).findByTitleContainingIgnoreCase(keyword);
     }
 
+    /**
+     * Tests search functionality with an empty keyword.
+     * Verifies that all tips are returned when search term is empty.
+     */
     @Test
     void testSearchTipsWithEmptyKeyword() {
         List<RecyclingTip> allTips = List.of(
@@ -235,6 +263,10 @@ class RecyclingTipServiceTest {
         verify(tipRepository, never()).findByTitleContainingIgnoreCase(any());
     }
 
+    /**
+     * Tests search functionality with a null keyword.
+     * Verifies that all tips are returned when search term is null.
+     */
     @Test
     void testSearchTipsWithNullKeyword() {
         List<RecyclingTip> allTips = List.of(

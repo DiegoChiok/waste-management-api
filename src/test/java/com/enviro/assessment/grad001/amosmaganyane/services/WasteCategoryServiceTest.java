@@ -140,6 +140,10 @@ class WasteCategoryServiceTest {
         assertEquals(2, results.size());
     }
 
+    /**
+     * Tests category deletion validation.
+     * Verifies that a category with no associated items can be deleted.
+     */
     @Test
     void shouldCheckIfCategoryCanBeDeleted() {
         Long id = 1L;
@@ -151,7 +155,10 @@ class WasteCategoryServiceTest {
         assertTrue(canDelete);
     }
 
-
+    /**
+     * Tests guideline count functionality for a category.
+     * Verifies correct counting of guidelines in a new category.
+     */
     @Test
     void testCountGuidelinesInCategory() {
         Long categoryId = 1L;
@@ -163,6 +170,10 @@ class WasteCategoryServiceTest {
         assertEquals(0, count);
     }
 
+    /**
+     * Tests retrieval of categories ordered by guideline count.
+     * Verifies that categories are returned in correct order with limit applied.
+     */
     @Test
     void testGetCategoriesWithMostGuidelines() {
         int limit = 2;

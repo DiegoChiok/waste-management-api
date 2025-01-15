@@ -16,6 +16,9 @@ class RecyclingTipRepositoryTest {
     @Autowired
     private WasteCategoryRepository categoryRepository;
 
+    /**
+     * Tests saving and retrieving a recycling tip with its category relationship.
+     */
     @Test
     void shouldSaveAndRetrieveRecyclingTip() {
         WasteCategory category = categoryRepository.save(
@@ -31,6 +34,9 @@ class RecyclingTipRepositoryTest {
         assertEquals("Paper Recycling", saved.getTitle());
     }
 
+    /**
+     * Tests successful deletion of a recycling tip from the database.
+     */
     @Test
     void shouldDeleteRecyclingTip() {
         WasteCategory category = categoryRepository.save(
