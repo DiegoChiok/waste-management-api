@@ -10,19 +10,22 @@ public class DisposalGuideline {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private final Long id;
+    private Long id;
 
     // Title and instructions are required fields to make recycling tips meaningful
     @Column(nullable = false)
-    private final String title;
+    private String title;
 
     @Column(nullable = false)
-    private final String instructions;
+    private String instructions;
 
     //Each disposal guideline belongs to a specific waste category
     @ManyToOne
     @JoinColumn(name = "category_id", nullable = false)
-    private final WasteCategory category;
+    private WasteCategory category;
+
+    public DisposalGuideline(){
+    }
 
     public DisposalGuideline (Long id, String title, String instructions, WasteCategory category){
         this.id = id;
@@ -47,6 +50,10 @@ public class DisposalGuideline {
         return category;
     }
 
+    public void setCategory(WasteCategory category) {
+        this.category = category;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -69,5 +76,6 @@ public class DisposalGuideline {
                 ", category=" + category +
                 '}';
     }
+
 
 }

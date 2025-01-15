@@ -179,4 +179,24 @@ class DisposalGuidelineServiceTest {
 
         assertTrue(results.isEmpty());
     }
+
+    @Test
+    void testCountGuidelinesInCategory() {
+        Long categoryId = 1L;
+        WasteCategory mockCategory = mock(WasteCategory.class);
+        List<DisposalGuideline> guidelines = List.of(
+                new DisposalGuideline(1L, "Guideline 1",
+                        "Instructions 1", mockCategory),
+                new DisposalGuideline(2L, "Guideline 2",
+                        "Instructions 2", mockCategory)
+        );
+
+        when(categoryRepository.findById(categoryId))
+                .thenReturn(Optional.of(mockCategory));
+        when(mockCategory.getGuidelines()).thenReturn(guidelines);
+
+        int count = service.countGuidelinesInCategory(categoryId);
+
+        assertEquals(2, count);
+    }
 }

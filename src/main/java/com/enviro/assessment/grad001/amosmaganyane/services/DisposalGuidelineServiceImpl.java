@@ -37,7 +37,7 @@ public class DisposalGuidelineServiceImpl implements DisposalGuidelineService {
         if (!isValidGuidelineInstructions(guideline.getInstructions())) {
             throw new IllegalArgumentException("Invalid guideline instructions");
         }
-
+        guideline.setCategory(category);
         return guidelineRepository.save(guideline);
     }
 
@@ -116,4 +116,8 @@ public class DisposalGuidelineServiceImpl implements DisposalGuidelineService {
         return guidelineRepository.findByTitleContainingIgnoreCase(keyword);
     }
 
+    @Override
+    public int countGuidelinesInCategory(Long categoryId) {
+        return getGuidelinesByCategory(categoryId).size();
+    }
 }

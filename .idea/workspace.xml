@@ -5,20 +5,32 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="f133bb6b-809a-401c-81bc-ea89620bae1a" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/enviro/assessment/grad001/amosmaganyane/config/OpenApiConfig.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/enviro/assessment/grad001/amosmaganyane/controllers/DisposalGuidelineController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/enviro/assessment/grad001/amosmaganyane/controllers/DisposalGuidelineController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/enviro/assessment/grad001/amosmaganyane/controllers/RecyclingTipController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/enviro/assessment/grad001/amosmaganyane/controllers/RecyclingTipController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/enviro/assessment/grad001/amosmaganyane/repositories/DisposalGuidelineRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/enviro/assessment/grad001/amosmaganyane/repositories/DisposalGuidelineRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/enviro/assessment/grad001/amosmaganyane/repositories/RecyclingTipRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/enviro/assessment/grad001/amosmaganyane/repositories/RecyclingTipRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/enviro/assessment/grad001/amosmaganyane/controllers/WasteCategoryController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/enviro/assessment/grad001/amosmaganyane/controllers/WasteCategoryController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/enviro/assessment/grad001/amosmaganyane/dto/DisposalGuidelineDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/enviro/assessment/grad001/amosmaganyane/dto/DisposalGuidelineDTO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/enviro/assessment/grad001/amosmaganyane/dto/RecyclingTipDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/enviro/assessment/grad001/amosmaganyane/dto/RecyclingTipDTO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/enviro/assessment/grad001/amosmaganyane/dto/WasteCategoryDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/enviro/assessment/grad001/amosmaganyane/dto/WasteCategoryDTO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/enviro/assessment/grad001/amosmaganyane/models/DisposalGuideline.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/enviro/assessment/grad001/amosmaganyane/models/DisposalGuideline.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/enviro/assessment/grad001/amosmaganyane/models/RecyclingTip.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/enviro/assessment/grad001/amosmaganyane/models/RecyclingTip.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/enviro/assessment/grad001/amosmaganyane/models/WasteCategory.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/enviro/assessment/grad001/amosmaganyane/models/WasteCategory.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/enviro/assessment/grad001/amosmaganyane/repositories/WasteCategoryRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/enviro/assessment/grad001/amosmaganyane/repositories/WasteCategoryRepository.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/enviro/assessment/grad001/amosmaganyane/services/DisposalGuidelineService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/enviro/assessment/grad001/amosmaganyane/services/DisposalGuidelineService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/enviro/assessment/grad001/amosmaganyane/services/DisposalGuidelineServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/enviro/assessment/grad001/amosmaganyane/services/DisposalGuidelineServiceImpl.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/enviro/assessment/grad001/amosmaganyane/services/RecyclingTipService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/enviro/assessment/grad001/amosmaganyane/services/RecyclingTipService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/enviro/assessment/grad001/amosmaganyane/services/RecyclingTipServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/enviro/assessment/grad001/amosmaganyane/services/RecyclingTipServiceImpl.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/enviro/assessment/grad001/amosmaganyane/services/WasteCategoryService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/enviro/assessment/grad001/amosmaganyane/services/WasteCategoryService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/enviro/assessment/grad001/amosmaganyane/services/WasteCategoryServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/enviro/assessment/grad001/amosmaganyane/services/WasteCategoryServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/com/enviro/assessment/grad001/amosmaganyane/controllers/DisposalGuidelineControllerTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/enviro/assessment/grad001/amosmaganyane/controllers/DisposalGuidelineControllerTest.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/test/java/com/enviro/assessment/grad001/amosmaganyane/controllers/RecyclingTipControllerTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/enviro/assessment/grad001/amosmaganyane/controllers/RecyclingTipControllerTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/com/enviro/assessment/grad001/amosmaganyane/controllers/WasteCategoryControllerTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/enviro/assessment/grad001/amosmaganyane/controllers/WasteCategoryControllerTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/com/enviro/assessment/grad001/amosmaganyane/repositories/WasteCategoryRepositoryTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/enviro/assessment/grad001/amosmaganyane/repositories/WasteCategoryRepositoryTest.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/test/java/com/enviro/assessment/grad001/amosmaganyane/services/DisposalGuidelineServiceTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/enviro/assessment/grad001/amosmaganyane/services/DisposalGuidelineServiceTest.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/test/java/com/enviro/assessment/grad001/amosmaganyane/services/RecyclingTipServiceTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/enviro/assessment/grad001/amosmaganyane/services/RecyclingTipServiceTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/com/enviro/assessment/grad001/amosmaganyane/services/WasteCategoryServiceTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/enviro/assessment/grad001/amosmaganyane/services/WasteCategoryServiceTest.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -50,8 +62,11 @@
   "keyToString": {
     "Application.WasteManagementApplication.executor": "Run",
     "JUnit.DisposalGuidelineControllerTest.executor": "Run",
+    "JUnit.DisposalGuidelineControllerTest.shouldGetGuidelinesByCategory.executor": "Run",
     "JUnit.DisposalGuidelineDTOTest.executor": "Run",
+    "JUnit.DisposalGuidelineRepositoryTest.executor": "Run",
     "JUnit.DisposalGuidelineServiceTest.executor": "Run",
+    "JUnit.DisposalGuidelineServiceTest.testCountGuidelinesInCategory.executor": "Run",
     "JUnit.DisposalGuidelineServiceTest.testGetGuidelinesByCategory.executor": "Run",
     "JUnit.DisposalGuidelineTest.executor": "Run",
     "JUnit.DisposalGuidelineTest.testDifferentDisposalGuidelinesShouldNotBeEqual.executor": "Run",
@@ -60,13 +75,21 @@
     "JUnit.RecyclingTipControllerTest.shouldGetTipsByCategory.executor": "Run",
     "JUnit.RecyclingTipDTOTest.executor": "Run",
     "JUnit.RecyclingTipServiceTest.executor": "Run",
+    "JUnit.RecyclingTipServiceTest.testCountGuidelinesInCategory.executor": "Run",
+    "JUnit.RecyclingTipServiceTest.testCountRecyclingTipsInCategory.executor": "Run",
     "JUnit.RecyclingTipServiceTest.testGetTipsByCategory.executor": "Run",
     "JUnit.RecyclingTipTest.executor": "Run",
     "JUnit.WasteCategoryControllerTest.executor": "Run",
     "JUnit.WasteCategoryControllerTest.testSearchCategories.executor": "Run",
     "JUnit.WasteCategoryControllerTest.testUpdateCategory.executor": "Run",
+    "JUnit.WasteCategoryDTOTest.executor": "Run",
     "JUnit.WasteCategoryRepositoryTest.executor": "Run",
+    "JUnit.WasteCategoryRepositoryTest.shouldFindByNameContainingIgnoreCase.executor": "Run",
+    "JUnit.WasteCategoryRepositoryTest.shouldSaveAndRetrieveWasteCategory.executor": "Run",
     "JUnit.WasteCategoryServiceTest.executor": "Run",
+    "JUnit.WasteCategoryServiceTest.shouldCheckIfCategoryCanBeDeleted.executor": "Run",
+    "JUnit.WasteCategoryServiceTest.shouldCountGuidelinesInCategory.executor": "Run",
+    "JUnit.WasteCategoryServiceTest.shouldGetCategoriesWithMostGuidelines.executor": "Run",
     "JUnit.WasteCategoryServiceTest.shouldHandleEmptySearchResults.executor": "Run",
     "JUnit.WasteCategoryServiceTest.shouldHandleNullSearchKeyword.executor": "Run",
     "JUnit.WasteCategoryServiceTest.shouldValidateCategoryNameFormat.executor": "Run",
@@ -77,6 +100,7 @@
     "JUnit.WasteCategoryTest.testToString.executor": "Run",
     "JUnit.amosmaganyane in waste-management-api.executor": "Run",
     "JUnit.dto in waste-management-api.executor": "Run",
+    "JUnit.java in waste-management-api.executor": "Run",
     "JUnit.repositories in waste-management-api.executor": "Run",
     "Maven.waste-management-api [clean].executor": "Run",
     "Maven.waste-management-api [install].executor": "Run",
@@ -91,55 +115,21 @@
     "settings.editor.selected.configurable": "project.propVCSSupport.DirectoryMappings"
   }
 }]]></component>
-  <component name="RunManager" selected="JUnit.DisposalGuidelineControllerTest">
-    <configuration name="DisposalGuidelineControllerTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+  <component name="RunManager" selected="Application.WasteManagementApplication">
+    <configuration name="WasteManagementApplication" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="com.enviro.assessment.grad001.amosmaganyane.WasteManagementApplication" />
       <module name="waste-management-api" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="com.enviro.assessment.grad001.amosmaganyane.controllers.*" />
+          <option name="PATTERN" value="com.enviro.assessment.grad001.amosmaganyane.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
-      <option name="PACKAGE_NAME" value="com.enviro.assessment.grad001.amosmaganyane.controllers" />
-      <option name="MAIN_CLASS_NAME" value="com.enviro.assessment.grad001.amosmaganyane.controllers.DisposalGuidelineControllerTest" />
-      <option name="TEST_OBJECT" value="class" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="DisposalGuidelineControllerTest.shouldGetGuidelinesByCategory" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="waste-management-api" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="com.enviro.assessment.grad001.amosmaganyane.controllers.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="com.enviro.assessment.grad001.amosmaganyane.controllers" />
-      <option name="MAIN_CLASS_NAME" value="com.enviro.assessment.grad001.amosmaganyane.controllers.DisposalGuidelineControllerTest" />
-      <option name="METHOD_NAME" value="shouldGetGuidelinesByCategory" />
-      <option name="TEST_OBJECT" value="method" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="DisposalGuidelineServiceTest.testGetGuidelinesByCategory" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="waste-management-api" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="com.enviro.assessment.grad001.amosmaganyane.services.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="com.enviro.assessment.grad001.amosmaganyane.services" />
-      <option name="MAIN_CLASS_NAME" value="com.enviro.assessment.grad001.amosmaganyane.services.DisposalGuidelineServiceTest" />
-      <option name="METHOD_NAME" value="testGetGuidelinesByCategory" />
-      <option name="TEST_OBJECT" value="method" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="RecyclingTipControllerTest.shouldGetTipsByCategory" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="RecyclingTipControllerTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="waste-management-api" />
       <extension name="coverage">
         <pattern>
@@ -149,35 +139,57 @@
       </extension>
       <option name="PACKAGE_NAME" value="com.enviro.assessment.grad001.amosmaganyane.controllers" />
       <option name="MAIN_CLASS_NAME" value="com.enviro.assessment.grad001.amosmaganyane.controllers.RecyclingTipControllerTest" />
-      <option name="METHOD_NAME" value="shouldGetTipsByCategory" />
+      <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="WasteCategoryControllerTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="waste-management-api" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.enviro.assessment.grad001.amosmaganyane.controllers.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.enviro.assessment.grad001.amosmaganyane.controllers" />
+      <option name="MAIN_CLASS_NAME" value="com.enviro.assessment.grad001.amosmaganyane.controllers.WasteCategoryControllerTest" />
+      <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="WasteCategoryRepositoryTest.shouldFindByNameContainingIgnoreCase" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="waste-management-api" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.enviro.assessment.grad001.amosmaganyane.repositories.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.enviro.assessment.grad001.amosmaganyane.repositories" />
+      <option name="MAIN_CLASS_NAME" value="com.enviro.assessment.grad001.amosmaganyane.repositories.WasteCategoryRepositoryTest" />
+      <option name="METHOD_NAME" value="shouldFindByNameContainingIgnoreCase" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="RecyclingTipServiceTest.testGetTipsByCategory" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="java in waste-management-api" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="waste-management-api" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="com.enviro.assessment.grad001.amosmaganyane.services.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="com.enviro.assessment.grad001.amosmaganyane.services" />
-      <option name="MAIN_CLASS_NAME" value="com.enviro.assessment.grad001.amosmaganyane.services.RecyclingTipServiceTest" />
-      <option name="METHOD_NAME" value="testGetTipsByCategory" />
-      <option name="TEST_OBJECT" value="method" />
+      <option name="TEST_OBJECT" value="directory" />
+      <dir value="$PROJECT_DIR$/src/test/java" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="JUnit.DisposalGuidelineControllerTest" />
-        <item itemvalue="JUnit.DisposalGuidelineControllerTest.shouldGetGuidelinesByCategory" />
-        <item itemvalue="JUnit.RecyclingTipControllerTest.shouldGetTipsByCategory" />
-        <item itemvalue="JUnit.DisposalGuidelineServiceTest.testGetGuidelinesByCategory" />
-        <item itemvalue="JUnit.RecyclingTipServiceTest.testGetTipsByCategory" />
+        <item itemvalue="Application.WasteManagementApplication" />
+        <item itemvalue="JUnit.java in waste-management-api" />
+        <item itemvalue="JUnit.RecyclingTipControllerTest" />
+        <item itemvalue="JUnit.WasteCategoryControllerTest" />
+        <item itemvalue="JUnit.WasteCategoryRepositoryTest.shouldFindByNameContainingIgnoreCase" />
       </list>
     </recent_temporary>
   </component>
@@ -210,12 +222,17 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-method">
           <url>file://$PROJECT_DIR$/src/test/java/com/enviro/assessment/grad001/amosmaganyane/controllers/RecyclingTipControllerTest.java</url>
-          <line>122</line>
+          <line>132</line>
           <properties class="com.enviro.assessment.grad001.amosmaganyane.controllers.RecyclingTipControllerTest" method="shouldGetTipsByCategory">
             <option name="EMULATED" value="true" />
             <option name="WATCH_EXIT" value="false" />
           </properties>
           <option name="timeStamp" value="4" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/test/java/com/enviro/assessment/grad001/amosmaganyane/controllers/WasteCategoryControllerTest.java</url>
+          <line>25</line>
+          <option name="timeStamp" value="5" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

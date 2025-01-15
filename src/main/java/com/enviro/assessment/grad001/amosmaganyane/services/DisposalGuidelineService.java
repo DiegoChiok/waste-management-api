@@ -62,4 +62,5 @@ public interface DisposalGuidelineService {
     List<DisposalGuideline> getGuidelinesByCategory(Long categoryId);
     List<DisposalGuideline> searchGuidelines(String keyword);
 
+    int countGuidelinesInCategory(Long categoryId);
 }

@@ -5,6 +5,7 @@ import com.enviro.assessment.grad001.amosmaganyane.models.WasteCategory;
 import com.enviro.assessment.grad001.amosmaganyane.services.DisposalGuidelineService;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
@@ -22,6 +23,7 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 @WebMvcTest(DisposalGuidelineController.class)
+@DisplayName("Disposal Guidelines API Tests")
 class DisposalGuidelineControllerTest {
 
     @Autowired
@@ -44,6 +46,7 @@ class DisposalGuidelineControllerTest {
     }
 
     @Test
+    @DisplayName("POST /categories/{categoryId}/guidelines - Should create a new disposal guideline")
     void testCreateGuideline() throws Exception {
         when(guidelineService.createGuideline(eq(1L), any(DisposalGuideline.class)))
                 .thenReturn(testGuideline);
@@ -57,6 +60,7 @@ class DisposalGuidelineControllerTest {
     }
 
     @Test
+    @DisplayName("POST /categories/{categoryId}/guidelines - Should return 400 for invalid guideline data")
     void testReturnBadRequestWhenCreatingInvalidGuideline() throws Exception {
         when(guidelineService.createGuideline(eq(1L), any(DisposalGuideline.class)))
                 .thenThrow(new IllegalArgumentException("Invalid guideline"));
@@ -68,6 +72,7 @@ class DisposalGuidelineControllerTest {
     }
 
     @Test
+    @DisplayName("GET /guidelines/{id} - Should return a guideline when it exists")
     void testGetGuidelineById() throws Exception {
         when(guidelineService.getGuidelineById(1L)).thenReturn(Optional.of(testGuideline));
 
@@ -78,6 +83,7 @@ class DisposalGuidelineControllerTest {
     }
 
     @Test
+    @DisplayName("GET /guidelines/{id} - Should return 404 when guideline not found")
     void testReturn404WhenGuidelineNotFound() throws Exception {
         when(guidelineService.getGuidelineById(999L)).thenReturn(Optional.empty());
 
@@ -86,6 +92,7 @@ class DisposalGuidelineControllerTest {
     }
 
     @Test
+    @DisplayName("GET /guidelines - Should return all disposal guidelines")
     void testGetAllGuidelines() throws Exception {
         List<DisposalGuideline> guidelines = List.of(
                 testGuideline,
@@ -102,6 +109,7 @@ class DisposalGuidelineControllerTest {
     }
 
     @Test
+    @DisplayName("PUT /guidelines/{id} - Should update an existing guideline")
     void testUpdateGuideline() throws Exception {
         DisposalGuideline updatedGuideline = new DisposalGuideline(1L,
                 "Updated Battery Disposal",
@@ -117,12 +125,14 @@ class DisposalGuidelineControllerTest {
     }
 
     @Test
+    @DisplayName("DELETE /guidelines/{id} - Should delete a guideline")
     void testDeleteGuideline() throws Exception {
         mockMvc.perform(delete("/wastemanagementapi/guidelines/1"))
                 .andExpect(status().isNoContent());
     }
 
     @Test
+    @DisplayName("GET /categories/{categoryId}/guidelines - Should return guidelines for a category")
     void shouldGetGuidelinesByCategory() throws Exception {
         List<DisposalGuideline> guidelines = List.of(testGuideline);
         when(guidelineService.getGuidelinesByCategory(1L)).thenReturn(guidelines);

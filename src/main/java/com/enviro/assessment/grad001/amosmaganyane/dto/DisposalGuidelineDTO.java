@@ -1,16 +1,35 @@
 package com.enviro.assessment.grad001.amosmaganyane.dto;
 
 import com.enviro.assessment.grad001.amosmaganyane.models.DisposalGuideline;
+import io.swagger.v3.oas.annotations.media.Schema;
 
+@Schema(description = "Data Transfer Object for Disposal Guidelines")
 public class DisposalGuidelineDTO {
+
+    @Schema(example = "1",
+            description = "Unique identifier of the disposal guideline")
     private Long id;
+
+    @Schema(example = "Battery Disposal",
+            description = "Title of the disposal guideline")
     private String title;
+
+    @Schema(example = "1. Remove batteries from device\n2." +
+            " Store in dry container\n3. Take to recycling center",
+            description = "Detailed step-by-step disposal instructions")
     private String instructions;
+
+    @Schema(example = "1",
+            description = "ID of the waste category this guideline belongs to")
     private Long categoryId;
+
+    @Schema(example = "Hazardous Waste",
+            description = "Name of the waste category this guideline belongs to")
     private String categoryName;
 
     public DisposalGuidelineDTO() {}
 
+    // Constructor with fields
     public DisposalGuidelineDTO(Long id, String title, String instructions,
                                 Long categoryId, String categoryName) {
         this.id = id;
@@ -20,6 +39,7 @@ public class DisposalGuidelineDTO {
         this.categoryName = categoryName;
     }
 
+    @Schema(hidden = true)
     public static DisposalGuidelineDTO fromEntity(DisposalGuideline guideline) {
         return new DisposalGuidelineDTO(
                 guideline.getId(),
