@@ -87,20 +87,23 @@ public class WasteCategoryController {
     })
     @PutMapping("/{id}")
     public ResponseEntity<WasteCategoryDTO> updateCategory(
-            @Parameter(description = "ID of the category to update")
             @PathVariable Long id,
             @RequestBody WasteCategoryDTO categoryDTO) {
         try {
-            WasteCategory category = new WasteCategory(
+            WasteCategory existingCategory = categoryService.getCategoryById(id)
+                    .orElseThrow(() -> new IllegalStateException("Category not found"));
+
+            WasteCategory categoryToUpdate = new WasteCategory(
                     id,
                     categoryDTO.getName(),
                     categoryDTO.getDescription()
             );
 
-            WasteCategory updated = categoryService.updateCategory(id, category);
+            WasteCategory updated = categoryService.updateCategory(id, categoryToUpdate);
             return new ResponseEntity<>(
                     WasteCategoryDTO.fromEntity(updated),
-                    HttpStatus.OK);
+                    HttpStatus.OK
+            );
         } catch (IllegalStateException e) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }

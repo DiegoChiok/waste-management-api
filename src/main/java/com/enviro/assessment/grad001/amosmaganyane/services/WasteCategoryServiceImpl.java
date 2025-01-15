@@ -50,10 +50,14 @@ public class WasteCategoryServiceImpl implements WasteCategoryService {
 
     @Override
     public WasteCategory updateCategory(Long id, WasteCategory category) {
-        // TODO: later figure out if more logic is needed for updating
-        return null;
+        return repository.findById(id)
+                .map(existingCategory -> {
+                    existingCategory.setName(category.getName());
+                    existingCategory.setDescription(category.getDescription());
+                    return repository.save(existingCategory);
+                })
+                .orElseThrow(() -> new IllegalStateException("Category not found"));
     }
-
 
     /**
      * {@inheritDoc}

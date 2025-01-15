@@ -18,11 +18,11 @@ public class WasteCategoryDTO {
             description = "Detailed description of the waste category")
     private String description;
 
-    @Schema(example = "5",
+    @Schema(example = "0",
             description = "Number of disposal guidelines associated with this category")
     private int guidelinesCount;
 
-    @Schema(example = "3",
+    @Schema(example = "0",
             description = "Number of recycling tips associated with this category")
     private int tipsCount;
 

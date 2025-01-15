@@ -1,5 +1,6 @@
 package com.enviro.assessment.grad001.amosmaganyane.controllers;
 
+import com.enviro.assessment.grad001.amosmaganyane.dto.WasteCategoryDTO;
 import com.enviro.assessment.grad001.amosmaganyane.models.WasteCategory;
 import com.enviro.assessment.grad001.amosmaganyane.services.WasteCategoryService;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -93,15 +94,44 @@ class WasteCategoryControllerTest {
     @Test
     @DisplayName("PUT /categories/{id} - Should update an existing category")
     void testUpdateCategory() throws Exception {
-        WasteCategory updatedCategory = new WasteCategory(1L, "Updated Name", "Updated description");
-        when(categoryService.updateCategory(eq(1L), any(WasteCategory.class)))
+        Long categoryId = 1L;
+        WasteCategoryDTO updateRequest = new WasteCategoryDTO();
+        updateRequest.setName("Updated Name");
+        updateRequest.setDescription("Updated description");
+
+        WasteCategory existingCategory = new WasteCategory(categoryId, "Old Name", "Old description");
+        WasteCategory updatedCategory = new WasteCategory(categoryId, "Updated Name", "Updated description");
+
+        when(categoryService.getCategoryById(categoryId))
+                .thenReturn(Optional.of(existingCategory));
+        when(categoryService.updateCategory(eq(categoryId), any(WasteCategory.class)))
                 .thenReturn(updatedCategory);
 
-        mockMvc.perform(put("/wastemanagementapi/categories/1")
+
+        mockMvc.perform(put("/wastemanagementapi/categories/" + categoryId)
                         .contentType(MediaType.APPLICATION_JSON)
-                        .content(objectMapper.writeValueAsString(updatedCategory)))
+                        .content(objectMapper.writeValueAsString(updateRequest)))
                 .andExpect(status().isOk())
-                .andExpect(jsonPath("$.name").value("Updated Name"));
+                .andExpect(jsonPath("$.id").value(categoryId))
+                .andExpect(jsonPath("$.name").value("Updated Name"))
+                .andExpect(jsonPath("$.description").value("Updated description"));
+    }
+
+    @Test
+    @DisplayName("PUT /categories/{id} - Should return 404 when category doesn't exist")
+    void testUpdateNonExistentCategory() throws Exception {
+        Long nonExistentId = 999L;
+        WasteCategoryDTO updateRequest = new WasteCategoryDTO();
+        updateRequest.setName("Updated Name");
+        updateRequest.setDescription("Updated description");
+
+        when(categoryService.getCategoryById(nonExistentId))
+                .thenReturn(Optional.empty());
+
+        mockMvc.perform(put("/wastemanagementapi/categories/" + nonExistentId)
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(objectMapper.writeValueAsString(updateRequest)))
+                .andExpect(status().isNotFound());
     }
 
     @Test
