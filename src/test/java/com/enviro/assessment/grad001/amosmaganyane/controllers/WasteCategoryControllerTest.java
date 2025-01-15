@@ -4,6 +4,7 @@ import com.enviro.assessment.grad001.amosmaganyane.models.WasteCategory;
 import com.enviro.assessment.grad001.amosmaganyane.services.WasteCategoryService;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
@@ -21,6 +22,7 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 @WebMvcTest(WasteCategoryController.class)
+@DisplayName("Waste Category API Tests")
 class WasteCategoryControllerTest {
 
     @Autowired
@@ -40,6 +42,7 @@ class WasteCategoryControllerTest {
     }
 
     @Test
+    @DisplayName("POST /categories - Should create a new waste category")
     void testCreateCategory() throws Exception {
         when(categoryService.createCategory(any(WasteCategory.class))).thenReturn(testCategory);
 
@@ -52,6 +55,7 @@ class WasteCategoryControllerTest {
     }
 
     @Test
+    @DisplayName("GET /categories/{id} - Should return a category when it exists")
     void testGetCategoryById() throws Exception {
         when(categoryService.getCategoryById(1L)).thenReturn(Optional.of(testCategory));
 
@@ -62,6 +66,7 @@ class WasteCategoryControllerTest {
     }
 
     @Test
+    @DisplayName("GET /categories/{id} - Should return 404 when category not found")
     void testReturn404WhenCategoryNotFound() throws Exception {
         when(categoryService.getCategoryById(999L)).thenReturn(Optional.empty());
 
@@ -70,6 +75,7 @@ class WasteCategoryControllerTest {
     }
 
     @Test
+    @DisplayName("GET /categories - Should return all categories")
     void testGetAllCategories() throws Exception {
         List<WasteCategory> categories = List.of(
                 testCategory,
@@ -85,6 +91,7 @@ class WasteCategoryControllerTest {
     }
 
     @Test
+    @DisplayName("PUT /categories/{id} - Should update an existing category")
     void testUpdateCategory() throws Exception {
         WasteCategory updatedCategory = new WasteCategory(1L, "Updated Name", "Updated description");
         when(categoryService.updateCategory(eq(1L), any(WasteCategory.class)))
@@ -98,12 +105,14 @@ class WasteCategoryControllerTest {
     }
 
     @Test
+    @DisplayName("DELETE /categories/{id} - Should delete a category")
     void testDeleteCategory() throws Exception {
         mockMvc.perform(delete("/wastemanagementapi/categories/1"))
                 .andExpect(status().isNoContent());
     }
 
     @Test
+    @DisplayName("GET /categories/search - Should return categories matching search criteria")
     void testSearchCategories() throws Exception {
         String keyword = "Recyclable";
         List<WasteCategory> searchResults = List.of(testCategory);

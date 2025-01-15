@@ -140,4 +140,42 @@ class WasteCategoryServiceTest {
         assertEquals(2, results.size());
     }
 
+    @Test
+    void shouldCheckIfCategoryCanBeDeleted() {
+        Long id = 1L;
+        WasteCategory category = new WasteCategory(id, "Recyclable", "Description");
+        when(wasteCategoryRepository.findById(id)).thenReturn(Optional.of(category));
+
+        boolean canDelete = service.canDeleteCategory(id);
+
+        assertTrue(canDelete);
+    }
+
+
+    @Test
+    void testCountGuidelinesInCategory() {
+        Long categoryId = 1L;
+        WasteCategory category = new WasteCategory(categoryId, "Recyclable", "Description");
+        when(wasteCategoryRepository.findById(categoryId)).thenReturn(Optional.of(category));
+
+        int count = service.countGuidelinesInCategory(categoryId);
+
+        assertEquals(0, count);
+    }
+
+    @Test
+    void testGetCategoriesWithMostGuidelines() {
+        int limit = 2;
+        List<WasteCategory> topCategories = List.of(
+                new WasteCategory(1L, "Recyclable", "Most guidelines"),
+                new WasteCategory(2L, "Organic", "Second most guidelines")
+        );
+        when(wasteCategoryRepository.findTopCategoriesByGuidelineCount(limit))
+                .thenReturn(topCategories);
+
+        List<WasteCategory> result = service.getCategoriesWithMostGuidelines(limit);
+
+        assertEquals(2, result.size());
+        verify(wasteCategoryRepository).findTopCategoriesByGuidelineCount(limit);
+    }
 }

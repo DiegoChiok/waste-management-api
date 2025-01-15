@@ -4,6 +4,7 @@ import com.enviro.assessment.grad001.amosmaganyane.models.DisposalGuideline;
 import com.enviro.assessment.grad001.amosmaganyane.models.RecyclingTip;
 import com.enviro.assessment.grad001.amosmaganyane.models.WasteCategory;
 import com.enviro.assessment.grad001.amosmaganyane.repositories.WasteCategoryRepository;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
@@ -12,6 +13,7 @@ import java.util.Optional;
  * Implementation of the WasteCategoryService interface.
  * Handles business logic for WasteCategory entities.
  */
+@Service
 public class WasteCategoryServiceImpl implements WasteCategoryService {
     public final WasteCategoryRepository repository;
 
@@ -90,6 +92,13 @@ public class WasteCategoryServiceImpl implements WasteCategoryService {
         return repository.findByNameContainingIgnoreCase(keyword);
     }
 
+    // Check if category has no guidelines or tips before deletion
+    @Override
+    public boolean canDeleteCategory(Long categoryId) {
+        return countGuidelinesInCategory(categoryId) == 0
+                && countRecyclingTipsInCategory(categoryId) == 0;
+    }
+
     /**
      * {@inheritDoc}
      * Validates a category name based on a few rules:
@@ -121,5 +130,20 @@ public class WasteCategoryServiceImpl implements WasteCategoryService {
                 .orElse(List.of());
     }
 
+    @Override
+    public int countGuidelinesInCategory(Long categoryId) {
+        return getGuidelinesForCategory(categoryId).size();
+    }
+
+    @Override
+    public int countRecyclingTipsInCategory(Long categoryId) {
+        return getRecyclingTipsForCategory(categoryId).size();
+    }
+
+    @Override
+    public List<WasteCategory> getCategoriesWithMostGuidelines(int limit) {
+        // Implementation would need a custom repository method
+        return repository.findTopCategoriesByGuidelineCount(limit);
+    }
 
 }

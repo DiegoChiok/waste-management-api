@@ -11,14 +11,14 @@ import java.util.Objects;
 public class WasteCategory {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private final Long id;
+    private Long id;
 
     // Name is required as it identifies the category type
     @Column(nullable = false)
-    private final String name;
+    private String name;
 
     @Column
-    private final String description;
+    private String description;
 
     // One category can have multiple recycling tips
     @OneToMany(mappedBy = "category", cascade = CascadeType.ALL, orphanRemoval = true)
@@ -27,6 +27,11 @@ public class WasteCategory {
     // One category can have multiple disposal guidelines
     @OneToMany(mappedBy = "category", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<DisposalGuideline> guidelines;
+
+    public WasteCategory() {
+        this.recyclingTips = new ArrayList<>();
+        this.guidelines = new ArrayList<>();
+    }
 
     public WasteCategory(Long id, String name, String description){
         this.id = id;

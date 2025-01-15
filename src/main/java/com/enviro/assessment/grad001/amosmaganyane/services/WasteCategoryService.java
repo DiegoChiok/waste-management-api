@@ -68,6 +68,9 @@ public interface WasteCategoryService {
      */
     List<WasteCategory> searchCategories(String keyword);
 
+    // Validation
+    boolean canDeleteCategory(Long categoryId);
+
     /**
      * Validates the format of a category name.
      *
@@ -79,4 +82,10 @@ public interface WasteCategoryService {
     // Guidelines and Tips Management
     List<DisposalGuideline> getGuidelinesForCategory(Long categoryId);
     List<RecyclingTip> getRecyclingTipsForCategory(Long categoryId);
+
+    // Statistics and Reporting
+    int countGuidelinesInCategory(Long categoryId);
+    int countRecyclingTipsInCategory(Long categoryId);
+    List<WasteCategory> getCategoriesWithMostGuidelines(int limit);
+
 }

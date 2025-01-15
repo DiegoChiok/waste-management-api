@@ -2,6 +2,8 @@ package com.enviro.assessment.grad001.amosmaganyane.repositories;
 
 import com.enviro.assessment.grad001.amosmaganyane.models.WasteCategory;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -27,4 +29,8 @@ public interface WasteCategoryRepository extends JpaRepository<WasteCategory, Lo
      * @return a list of matching WasteCategory objects
      */
     List<WasteCategory> findByNameContainingIgnoreCase(String keyword);
+
+    @Query("SELECT w FROM WasteCategory w LEFT JOIN w.guidelines g " +
+            "GROUP BY w ORDER BY COUNT(g) DESC LIMIT :limit")
+    List<WasteCategory> findTopCategoriesByGuidelineCount(@Param("limit") int limit);
 }

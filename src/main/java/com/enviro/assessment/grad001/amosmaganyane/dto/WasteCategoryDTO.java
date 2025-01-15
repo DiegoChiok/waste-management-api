@@ -1,22 +1,51 @@
 package com.enviro.assessment.grad001.amosmaganyane.dto;
 
 import com.enviro.assessment.grad001.amosmaganyane.models.WasteCategory;
+import io.swagger.v3.oas.annotations.media.Schema;
 
+@Schema(description = "Data Transfer Object for Waste Categories")
 public class WasteCategoryDTO {
+
+    @Schema(example = "1",
+            description = "Unique identifier of the waste category")
     private Long id;
+
+    @Schema(example = "Recyclable Materials",
+            description = "Name of the waste category")
     private String name;
+
+    @Schema(example = "Materials that can be processed and reused, including paper, glass, and plastics",
+            description = "Detailed description of the waste category")
     private String description;
+
+    @Schema(example = "5",
+            description = "Number of disposal guidelines associated with this category")
+    private int guidelinesCount;
+
+    @Schema(example = "3",
+            description = "Number of recycling tips associated with this category")
+    private int tipsCount;
 
     public WasteCategoryDTO() {}
 
-    public WasteCategoryDTO(Long id, String name, String description) {
+    public WasteCategoryDTO(Long id, String name, String description,
+                            int guidelinesCount, int tipsCount) {
         this.id = id;
         this.name = name;
         this.description = description;
+        this.guidelinesCount = guidelinesCount;
+        this.tipsCount = tipsCount;
     }
 
+    @Schema(hidden = true)
     public static WasteCategoryDTO fromEntity(WasteCategory category) {
-        return new WasteCategoryDTO(category.getId(), category.getName(), category.getDescription());
+        return new WasteCategoryDTO(
+                category.getId(),
+                category.getName(),
+                category.getDescription(),
+                category.getGuidelines().size(),
+                category.getRecyclingTips().size()
+        );
     }
 
     public Long getId() {
@@ -43,5 +72,19 @@ public class WasteCategoryDTO {
         this.description = description;
     }
 
+    public int getGuidelinesCount() {
+        return guidelinesCount;
+    }
 
+    public void setGuidelinesCount(int guidelinesCount) {
+        this.guidelinesCount = guidelinesCount;
+    }
+
+    public int getTipsCount() {
+        return tipsCount;
+    }
+
+    public void setTipsCount(int tipsCount) {
+        this.tipsCount = tipsCount;
+    }
 }
