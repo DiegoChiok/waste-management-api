@@ -27,9 +27,17 @@ public class WasteCategoryServiceImpl implements WasteCategoryService {
      */
     @Override
     public WasteCategory createCategory(WasteCategory category) {
+
+        if (!isValidCategoryName(category.getName())) {
+            throw new IllegalArgumentException("Invalid category name format");
+        }
+
+        if (!isCategoryNameUnique(category.getName())) {
+            throw new IllegalArgumentException("Category name already exists");
+        }
+
         return repository.save(category);
     }
-
     /**
      * {@inheritDoc}
      * Fetches a category by ID using repository's findById method.

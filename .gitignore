@@ -31,8 +31,17 @@ build/
 !**/src/main/**/build/
 !**/src/test/**/build/
 
-### VS Code ###
-.vscode/
+### IDE specific ###
+.idea/
 
 ### Mac OS ###
 .DS_Store
+
+### Logs ###
+*.log
+
+### OS specific ###
+Thumbs.db
+
+### H2 database files ###
+*.db

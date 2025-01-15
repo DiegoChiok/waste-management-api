@@ -2,6 +2,7 @@ package com.enviro.assessment.grad001.amosmaganyane.dto;
 
 import com.enviro.assessment.grad001.amosmaganyane.models.WasteCategory;
 import io.swagger.v3.oas.annotations.media.Schema;
+import jakarta.validation.constraints.Size;
 
 @Schema(description = "Data Transfer Object for Waste Categories")
 public class WasteCategoryDTO {
@@ -12,10 +13,12 @@ public class WasteCategoryDTO {
 
     @Schema(example = "Recyclable Materials",
             description = "Name of the waste category")
+    @Size(min = 3, max = 50, message = "Name must be between 3 and 50 characters")
     private String name;
 
     @Schema(example = "Materials that can be processed and reused, including paper, glass, and plastics",
             description = "Detailed description of the waste category")
+    @Size(max = 500, message = "Description cannot exceed 500 characters")
     private String description;
 
     @Schema(example = "0",

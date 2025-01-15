@@ -8,6 +8,7 @@ import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -33,18 +34,23 @@ public class WasteCategoryController {
             @ApiResponse(responseCode = "400", description = "Invalid input data")
     })
     @PostMapping
+    @Valid
     public ResponseEntity<WasteCategoryDTO> createCategory(
             @Parameter(description = "Waste category to create")
             @RequestBody WasteCategoryDTO categoryDTO) {
-        WasteCategory category = new WasteCategory(
-                null,
-                categoryDTO.getName(),
-                categoryDTO.getDescription()
-        );
+        try {
+            WasteCategory category = new WasteCategory(
+                    null,
+                    categoryDTO.getName(),
+                    categoryDTO.getDescription()
+            );
 
-        WasteCategory created = categoryService.createCategory(category);
-        return new ResponseEntity<>(WasteCategoryDTO.fromEntity(created)
-                , HttpStatus.CREATED);
+            WasteCategory created = categoryService.createCategory(category);
+            return new ResponseEntity<>(WasteCategoryDTO.fromEntity(created),
+                    HttpStatus.CREATED);
+        } catch (IllegalArgumentException e) {
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        }
     }
 
     @Operation(summary = "Get a waste category by ID",
