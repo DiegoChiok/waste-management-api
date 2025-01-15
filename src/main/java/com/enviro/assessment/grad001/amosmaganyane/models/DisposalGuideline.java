@@ -42,8 +42,16 @@ public class DisposalGuideline {
         return title;
     }
 
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
     public String getInstructions() {
         return instructions;
+    }
+
+    public void setInstructions(String instructions) {
+        this.instructions = instructions;
     }
 
     public WasteCategory getCategory() {
@@ -76,6 +84,5 @@ public class DisposalGuideline {
                 ", category=" + category +
                 '}';
     }
-
 
 }

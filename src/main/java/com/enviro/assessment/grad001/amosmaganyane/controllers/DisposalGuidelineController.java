@@ -122,14 +122,17 @@ public class DisposalGuidelineController {
             @Parameter(description = "Updated guideline details")
             @RequestBody DisposalGuidelineDTO guidelineDTO) {
         try {
-            DisposalGuideline guideline = new DisposalGuideline(
+            DisposalGuideline existingGuideline = guidelineService.getGuidelineById(id)
+                    .orElseThrow(() -> new IllegalStateException("Guideline not found"));
+
+            DisposalGuideline guidelineToUpdate = new DisposalGuideline(
                     id,
                     guidelineDTO.getTitle(),
                     guidelineDTO.getInstructions(),
-                    null
+                    existingGuideline.getCategory()
             );
 
-            DisposalGuideline updated = guidelineService.updateGuideline(id, guideline);
+            DisposalGuideline updated = guidelineService.updateGuideline(id, guidelineToUpdate);
             return new ResponseEntity<>(
                     DisposalGuidelineDTO.fromEntity(updated),
                     HttpStatus.OK

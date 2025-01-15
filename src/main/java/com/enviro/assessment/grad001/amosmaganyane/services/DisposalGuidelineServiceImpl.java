@@ -66,15 +66,15 @@ public class DisposalGuidelineServiceImpl implements DisposalGuidelineService {
      */
     @Override
     public DisposalGuideline updateGuideline(Long id, DisposalGuideline guideline) {
-        if (!guidelineRepository.existsById(id)) {
-            throw new IllegalStateException("Disposal guideline not found");
-        }
+        return guidelineRepository.findById(id)
+                .map(existingGuideline -> {
 
-        if (!isValidGuidelineInstructions(guideline.getInstructions())) {
-            throw new IllegalArgumentException("Invalid guideline instructions");
-        }
+                    existingGuideline.setTitle(guideline.getTitle());
+                    existingGuideline.setInstructions(guideline.getInstructions());
 
-        return guidelineRepository.save(guideline);
+                    return guidelineRepository.save(existingGuideline);
+                })
+                .orElseThrow(() -> new IllegalStateException("Guideline not found"));
     }
 
     /**

@@ -104,20 +104,45 @@ class DisposalGuidelineServiceTest {
     @Test
     void testUpdateGuidelineSuccessfully() {
         Long guidelineId = 1L;
-        DisposalGuideline updatedGuideline = new DisposalGuideline(guidelineId,
+        DisposalGuideline existingGuideline = new DisposalGuideline(guidelineId,
+                "Old Title", "Old instructions", testCategory);
+        DisposalGuideline updateRequest = new DisposalGuideline(guidelineId,
                 "Updated Title",
                 "Updated detailed instructions that meet the minimum length requirement",
-                testCategory);
+                null); // null category in request
+        DisposalGuideline expectedResult = new DisposalGuideline(guidelineId,
+                "Updated Title",
+                "Updated detailed instructions that meet the minimum length requirement",
+                testCategory); // preserved category
 
-        when(guidelineRepository.existsById(guidelineId))
-                .thenReturn(true);
+        when(guidelineRepository.findById(guidelineId))
+                .thenReturn(Optional.of(existingGuideline));
         when(guidelineRepository.save(any(DisposalGuideline.class)))
-                .thenReturn(updatedGuideline);
+                .thenReturn(expectedResult);
 
-        DisposalGuideline result = service.updateGuideline(guidelineId, updatedGuideline);
+        DisposalGuideline result = service.updateGuideline(guidelineId, updateRequest);
 
         assertEquals("Updated Title", result.getTitle());
+        assertEquals("Updated detailed instructions that meet the minimum length requirement",
+                result.getInstructions());
+        assertEquals(testCategory, result.getCategory());
+        verify(guidelineRepository).findById(guidelineId);
         verify(guidelineRepository).save(any(DisposalGuideline.class));
+    }
+
+    @Test
+    void testUpdateGuidelineNotFound() {
+        Long nonExistentId = 999L;
+        DisposalGuideline updateRequest = new DisposalGuideline(nonExistentId,
+                "Title", "Instructions", null);
+
+        when(guidelineRepository.findById(nonExistentId))
+                .thenReturn(Optional.empty());
+
+        assertThrows(IllegalStateException.class,
+                () -> service.updateGuideline(nonExistentId, updateRequest));
+        verify(guidelineRepository).findById(nonExistentId);
+        verify(guidelineRepository, never()).save(any());
     }
 
     @Test

@@ -1,5 +1,6 @@
 package com.enviro.assessment.grad001.amosmaganyane.controllers;
 
+import com.enviro.assessment.grad001.amosmaganyane.dto.DisposalGuidelineDTO;
 import com.enviro.assessment.grad001.amosmaganyane.models.DisposalGuideline;
 import com.enviro.assessment.grad001.amosmaganyane.models.WasteCategory;
 import com.enviro.assessment.grad001.amosmaganyane.services.DisposalGuidelineService;
@@ -111,19 +112,50 @@ class DisposalGuidelineControllerTest {
     @Test
     @DisplayName("PUT /guidelines/{id} - Should update an existing guideline")
     void testUpdateGuideline() throws Exception {
-        DisposalGuideline updatedGuideline = new DisposalGuideline(1L,
+        Long guidelineId = 1L;
+        DisposalGuidelineDTO updateRequest = new DisposalGuidelineDTO();
+        updateRequest.setTitle("Updated Battery Disposal");
+        updateRequest.setInstructions("Updated disposal instructions");
+
+        DisposalGuideline existingGuideline = new DisposalGuideline(guidelineId,
+                "Old Title", "Old instructions", testCategory);
+        DisposalGuideline updatedGuideline = new DisposalGuideline(guidelineId,
                 "Updated Battery Disposal",
-                "Updated disposal instructions", testCategory);
-        when(guidelineService.updateGuideline(eq(1L), any(DisposalGuideline.class)))
+                "Updated disposal instructions",
+                testCategory);
+
+        when(guidelineService.getGuidelineById(guidelineId))
+                .thenReturn(Optional.of(existingGuideline));
+        when(guidelineService.updateGuideline(eq(guidelineId), any(DisposalGuideline.class)))
                 .thenReturn(updatedGuideline);
 
-        mockMvc.perform(put("/wastemanagementapi/guidelines/1")
+        mockMvc.perform(put("/wastemanagementapi/guidelines/" + guidelineId)
                         .contentType(MediaType.APPLICATION_JSON)
-                        .content(objectMapper.writeValueAsString(updatedGuideline)))
+                        .content(objectMapper.writeValueAsString(updateRequest)))
                 .andExpect(status().isOk())
-                .andExpect(jsonPath("$.title").value("Updated Battery Disposal"));
+                .andExpect(jsonPath("$.id").value(guidelineId))
+                .andExpect(jsonPath("$.title").value("Updated Battery Disposal"))
+                .andExpect(jsonPath("$.instructions").value("Updated disposal instructions"))
+                .andExpect(jsonPath("$.categoryId").value(testCategory.getId()))
+                .andExpect(jsonPath("$.categoryName").value(testCategory.getName()));
     }
 
+    @Test
+    @DisplayName("PUT /guidelines/{id} - Should return 404 when guideline not found")
+    void testUpdateNonExistentGuideline() throws Exception {
+        Long nonExistentId = 999L;
+        DisposalGuidelineDTO updateRequest = new DisposalGuidelineDTO();
+        updateRequest.setTitle("Updated Title");
+        updateRequest.setInstructions("Updated instructions");
+
+        when(guidelineService.getGuidelineById(nonExistentId))
+                .thenReturn(Optional.empty());
+
+        mockMvc.perform(put("/wastemanagementapi/guidelines/" + nonExistentId)
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(objectMapper.writeValueAsString(updateRequest)))
+                .andExpect(status().isNotFound());
+    }
     @Test
     @DisplayName("DELETE /guidelines/{id} - Should delete a guideline")
     void testDeleteGuideline() throws Exception {
