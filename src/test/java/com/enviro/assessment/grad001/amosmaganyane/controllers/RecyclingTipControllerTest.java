@@ -1,5 +1,6 @@
 package com.enviro.assessment.grad001.amosmaganyane.controllers;
 
+import com.enviro.assessment.grad001.amosmaganyane.dto.RecyclingTipDTO;
 import com.enviro.assessment.grad001.amosmaganyane.models.RecyclingTip;
 import com.enviro.assessment.grad001.amosmaganyane.models.WasteCategory;
 import com.enviro.assessment.grad001.amosmaganyane.services.RecyclingTipService;
@@ -109,16 +110,47 @@ class RecyclingTipControllerTest {
     @Test
     @DisplayName("PUT /tips/{id} - Should update an existing tip")
     void testUpdateTip() throws Exception {
-        RecyclingTip updatedTip = new RecyclingTip(1L, "Updated Title",
+        Long tipId = 1L;
+        RecyclingTipDTO updateRequest = new RecyclingTipDTO();
+        updateRequest.setTitle("Updated Title");
+        updateRequest.setContent("Updated content");
+
+        RecyclingTip existingTip = new RecyclingTip(tipId, "Old Title",
+                "Old content", testCategory);
+        RecyclingTip updatedTip = new RecyclingTip(tipId, "Updated Title",
                 "Updated content", testCategory);
-        when(tipService.updateTip(eq(1L), any(RecyclingTip.class)))
+
+        when(tipService.getTipById(tipId))
+                .thenReturn(Optional.of(existingTip));
+        when(tipService.updateTip(eq(tipId), any(RecyclingTip.class)))
                 .thenReturn(updatedTip);
 
-        mockMvc.perform(put("/wastemanagementapi/tips/1")
+        mockMvc.perform(put("/wastemanagementapi/tips/" + tipId)
                         .contentType(MediaType.APPLICATION_JSON)
-                        .content(objectMapper.writeValueAsString(updatedTip)))
+                        .content(objectMapper.writeValueAsString(updateRequest)))
                 .andExpect(status().isOk())
-                .andExpect(jsonPath("$.title").value("Updated Title"));
+                .andExpect(jsonPath("$.id").value(tipId))
+                .andExpect(jsonPath("$.title").value("Updated Title"))
+                .andExpect(jsonPath("$.content").value("Updated content"))
+                .andExpect(jsonPath("$.categoryId").value(testCategory.getId()))
+                .andExpect(jsonPath("$.categoryName").value(testCategory.getName()));
+    }
+
+    @Test
+    @DisplayName("PUT /tips/{id} - Should return 404 when tip not found")
+    void testUpdateNonExistentTip() throws Exception {
+        Long nonExistentId = 999L;
+        RecyclingTipDTO updateRequest = new RecyclingTipDTO();
+        updateRequest.setTitle("Updated Title");
+        updateRequest.setContent("Updated content");
+
+        when(tipService.getTipById(nonExistentId))
+                .thenReturn(Optional.empty());
+
+        mockMvc.perform(put("/wastemanagementapi/tips/" + nonExistentId)
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(objectMapper.writeValueAsString(updateRequest)))
+                .andExpect(status().isNotFound());
     }
 
     @Test

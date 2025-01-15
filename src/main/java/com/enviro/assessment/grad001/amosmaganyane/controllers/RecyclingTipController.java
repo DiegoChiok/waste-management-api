@@ -123,22 +123,23 @@ public class RecyclingTipController {
             @Parameter(description = "Updated tip details")
             @RequestBody RecyclingTipDTO tipDTO) {
         try {
-            RecyclingTip tip = new RecyclingTip(
+            RecyclingTip existingTip = tipService.getTipById(id)
+                    .orElseThrow(() -> new IllegalStateException("Tip not found"));
+
+            RecyclingTip tipToUpdate = new RecyclingTip(
                     id,
                     tipDTO.getTitle(),
                     tipDTO.getContent(),
-                    null
+                    existingTip.getCategory()
             );
 
-            RecyclingTip updated = tipService.updateTip(id, tip);
+            RecyclingTip updated = tipService.updateTip(id, tipToUpdate);
             return new ResponseEntity<>(
                     RecyclingTipDTO.fromEntity(updated),
                     HttpStatus.OK
             );
         } catch (IllegalStateException e) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-        } catch (IllegalArgumentException e) {
-            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
     }
 

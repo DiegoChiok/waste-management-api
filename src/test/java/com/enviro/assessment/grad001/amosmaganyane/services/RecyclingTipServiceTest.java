@@ -102,17 +102,39 @@ class RecyclingTipServiceTest {
      */
     @Test
     void testUpdateTipSuccessfully() {
+        // Given
         Long tipId = 1L;
-        RecyclingTip updatedTip = new RecyclingTip(tipId, "Updated Title",
-                "Updated content that is valid", testCategory);
+        RecyclingTip existingTip = new RecyclingTip(tipId, "Old Title",
+                "Old content", testCategory);
+        RecyclingTip updateRequest = new RecyclingTip(tipId, "Updated Title",
+                "Updated content", null);
+        RecyclingTip expectedResult = new RecyclingTip(tipId, "Updated Title",
+                "Updated content", testCategory);
 
-        when(tipRepository.existsById(tipId)).thenReturn(true);
-        when(tipRepository.save(any(RecyclingTip.class))).thenReturn(updatedTip);
+        when(tipRepository.findById(tipId)).thenReturn(Optional.of(existingTip));
+        when(tipRepository.save(any(RecyclingTip.class))).thenReturn(expectedResult);
 
-        RecyclingTip result = service.updateTip(tipId, updatedTip);
+        RecyclingTip result = service.updateTip(tipId, updateRequest);
 
         assertEquals("Updated Title", result.getTitle());
+        assertEquals("Updated content", result.getContent());
+        assertEquals(testCategory, result.getCategory());
+        verify(tipRepository).findById(tipId);
         verify(tipRepository).save(any(RecyclingTip.class));
+    }
+
+    @Test
+    void testUpdateTipNotFound() {
+        Long nonExistentId = 999L;
+        RecyclingTip updateRequest = new RecyclingTip(nonExistentId, "Title",
+                "Content", null);
+
+        when(tipRepository.findById(nonExistentId)).thenReturn(Optional.empty());
+
+        assertThrows(IllegalStateException.class,
+                () -> service.updateTip(nonExistentId, updateRequest));
+        verify(tipRepository).findById(nonExistentId);
+        verify(tipRepository, never()).save(any());
     }
 
     @Test

@@ -64,15 +64,15 @@ public class RecyclingTipServiceImpl implements RecyclingTipService {
      */
     @Override
     public RecyclingTip updateTip(Long id, RecyclingTip tip) {
-        if (!tipRepository.existsById(id)) {
-            throw new IllegalStateException("Recycling tip not found");
-        }
-
-        if (!isValidTipContent(tip.getContent())) {
-            throw new IllegalArgumentException("Invalid tip content");
-        }
-
-        return tipRepository.save(tip);
+        return tipRepository.findById(id)
+                .map(existingTip -> {
+                    // Update fields but preserve the category
+                    existingTip.setTitle(tip.getTitle());
+                    existingTip.setContent(tip.getContent());
+                    // Category remains the same
+                    return tipRepository.save(existingTip);
+                })
+                .orElseThrow(() -> new IllegalStateException("Tip not found"));
     }
 
 
