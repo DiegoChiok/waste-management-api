@@ -5,6 +5,7 @@ import com.enviro.assessment.grad001.amosmaganyane.models.WasteCategory;
 import com.enviro.assessment.grad001.amosmaganyane.services.RecyclingTipService;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
@@ -22,6 +23,7 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 @WebMvcTest(RecyclingTipController.class)
+@DisplayName("Recycling Tips API Tests")
 class RecyclingTipControllerTest {
 
     @Autowired
@@ -44,6 +46,7 @@ class RecyclingTipControllerTest {
     }
 
     @Test
+    @DisplayName("POST /categories/{categoryId}/tips - Should create a new recycling tip")
     void testCreateTip() throws Exception {
         when(tipService.createTip(eq(1L), any(RecyclingTip.class))).thenReturn(testTip);
 
@@ -56,6 +59,7 @@ class RecyclingTipControllerTest {
     }
 
     @Test
+    @DisplayName("POST /categories/{categoryId}/tips - Should return 400 for invalid tip data")
     void testReturnBadRequestWhenCreatingInvalidTip() throws Exception {
         when(tipService.createTip(eq(1L), any(RecyclingTip.class)))
                 .thenThrow(new IllegalArgumentException("Invalid tip"));
@@ -67,6 +71,7 @@ class RecyclingTipControllerTest {
     }
 
     @Test
+    @DisplayName("GET /tips/{id} - Should return a tip when it exists")
     void testGetTipById() throws Exception {
         when(tipService.getTipById(1L)).thenReturn(Optional.of(testTip));
 
@@ -77,6 +82,7 @@ class RecyclingTipControllerTest {
     }
 
     @Test
+    @DisplayName("GET /tips/{id} - Should return 404 when tip not found")
     void testReturn404WhenTipNotFound() throws Exception {
         when(tipService.getTipById(999L)).thenReturn(Optional.empty());
 
@@ -85,6 +91,7 @@ class RecyclingTipControllerTest {
     }
 
     @Test
+    @DisplayName("GET /tips - Should return all recycling tips")
     void testGetAllTips() throws Exception {
         List<RecyclingTip> tips = List.of(
                 testTip,
@@ -100,6 +107,7 @@ class RecyclingTipControllerTest {
     }
 
     @Test
+    @DisplayName("PUT /tips/{id} - Should update an existing tip")
     void testUpdateTip() throws Exception {
         RecyclingTip updatedTip = new RecyclingTip(1L, "Updated Title",
                 "Updated content", testCategory);
@@ -114,12 +122,14 @@ class RecyclingTipControllerTest {
     }
 
     @Test
+    @DisplayName("DELETE /tips/{id} - Should delete a tip")
     void testDeleteTip() throws Exception {
         mockMvc.perform(delete("/wastemanagementapi/tips/1"))
                 .andExpect(status().isNoContent());
     }
 
     @Test
+    @DisplayName("GET /categories/{categoryId}/tips - Should return tips for a category")
     void shouldGetTipsByCategory() throws Exception {
         List<RecyclingTip> tips = List.of(testTip);
         when(tipService.getTipsByCategory(1L)).thenReturn(tips);
@@ -129,6 +139,5 @@ class RecyclingTipControllerTest {
                 .andExpect(jsonPath("$.length()").value(1))
                 .andExpect(jsonPath("$[0].title").value("Paper Recycling"));
     }
-
 
 }

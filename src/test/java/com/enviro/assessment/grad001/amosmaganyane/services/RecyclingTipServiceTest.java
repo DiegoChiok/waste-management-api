@@ -1,5 +1,6 @@
 package com.enviro.assessment.grad001.amosmaganyane.services;
 
+import com.enviro.assessment.grad001.amosmaganyane.models.DisposalGuideline;
 import com.enviro.assessment.grad001.amosmaganyane.models.RecyclingTip;
 import com.enviro.assessment.grad001.amosmaganyane.models.WasteCategory;
 import com.enviro.assessment.grad001.amosmaganyane.repositories.RecyclingTipRepository;
@@ -159,5 +160,25 @@ class RecyclingTipServiceTest {
         assertEquals(2, results.size());
         verify(categoryRepository).findById(categoryId);
         verify(mockCategory).getRecyclingTips();
+    }
+
+    @Test
+    void testCountRecyclingTipsInCategory() {
+        Long categoryId = 1L;
+        WasteCategory mockCategory = mock(WasteCategory.class);
+        List<RecyclingTip> tips = List.of(
+                new RecyclingTip(1L, "Tip 1",
+                        "Content 1", mockCategory),
+                new RecyclingTip(2L, "Tip 2",
+                        "Content 2", mockCategory)
+        );
+
+        when(categoryRepository.findById(categoryId))
+                .thenReturn(Optional.of(mockCategory));
+        when(mockCategory.getRecyclingTips()).thenReturn(tips);
+
+        int count = service.countTipsInCategory(categoryId);
+
+        assertEquals(2, count);
     }
 }

@@ -1,12 +1,29 @@
 package com.enviro.assessment.grad001.amosmaganyane.dto;
 
 import com.enviro.assessment.grad001.amosmaganyane.models.RecyclingTip;
+import io.swagger.v3.oas.annotations.media.Schema;
 
+@Schema(description = "Data Transfer Object for Recycling Tips")
 public class RecyclingTipDTO {
+
+    @Schema(example = "1",
+            description = "Unique identifier of the recycling tip")
     private Long id;
+
+    @Schema(example = "Paper Recycling Guide",
+            description = "Title of the recycling tip")
     private String title;
+
+    @Schema(example = "1. Separate paper by type\n2. Remove staples and clips\n3. Keep paper dry and clean",
+            description = "Detailed recycling instructions and helpful information")
     private String content;
+
+    @Schema(example = "1",
+            description = "ID of the waste category this tip belongs to")
     private Long categoryId;
+
+    @Schema(example = "Recyclable Materials",
+            description = "Name of the waste category this tip belongs to")
     private String categoryName;
 
     public RecyclingTipDTO() {}
@@ -20,6 +37,7 @@ public class RecyclingTipDTO {
         this.categoryName = categoryName;
     }
 
+    @Schema(hidden = true)
     public static RecyclingTipDTO fromEntity(RecyclingTip tip) {
         return new RecyclingTipDTO(
                 tip.getId(),

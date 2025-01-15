@@ -36,7 +36,7 @@ public class RecyclingTipServiceImpl implements RecyclingTipService {
         if (!isValidTipContent(tip.getContent())) {
             throw new IllegalArgumentException("Invalid tip content");
         }
-
+        tip.setCategory(category);
         return tipRepository.save(tip);
     }
 
@@ -114,5 +114,10 @@ public class RecyclingTipServiceImpl implements RecyclingTipService {
             return getAllTips();
         }
         return tipRepository.findByTitleContainingIgnoreCase(keyword);
+    }
+
+    @Override
+    public int countTipsInCategory(Long categoryId) {
+        return getTipsByCategory(categoryId).size();
     }
 }

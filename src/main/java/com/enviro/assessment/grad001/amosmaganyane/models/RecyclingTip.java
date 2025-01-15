@@ -9,19 +9,22 @@ import java.util.Objects;
 public class RecyclingTip {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private final Long id;
+    private Long id;
 
     //Title and content are required fields to make recycling tips meaningful
     @Column(nullable = false)
-    private final String title;
+    private String title;
 
     @Column(nullable = false)
-    private final String content;
+    private String content;
 
     //Each recycling tip belongs to a specific waste category
     @ManyToOne
     @JoinColumn(name = "category_id", nullable = false)
-    private final WasteCategory category;
+    private WasteCategory category;
+
+    public RecyclingTip() {
+    }
 
     public RecyclingTip(Long id, String title, String content, WasteCategory category) {
         this.id = id;
@@ -44,6 +47,10 @@ public class RecyclingTip {
 
     public WasteCategory getCategory(){
         return category;
+    }
+
+    public void setCategory(WasteCategory category) {
+        this.category = category;
     }
 
     @Override

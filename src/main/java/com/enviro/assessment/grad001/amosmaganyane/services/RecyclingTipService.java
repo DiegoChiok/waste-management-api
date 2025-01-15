@@ -62,4 +62,6 @@ public interface RecyclingTipService {
     // Business operations
     List<RecyclingTip> getTipsByCategory(Long categoryId);
     List<RecyclingTip> searchTips(String keyword);
+
+    int countTipsInCategory(Long categoryId);
 }
