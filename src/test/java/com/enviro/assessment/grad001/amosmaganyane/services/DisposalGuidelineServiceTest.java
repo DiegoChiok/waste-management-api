@@ -224,4 +224,38 @@ class DisposalGuidelineServiceTest {
 
         assertEquals(2, count);
     }
+
+    @Test
+    void testSearchGuidelinesWithKeyword() {
+        String keyword = "battery";
+        List<DisposalGuideline> expectedGuidelines = List.of(
+                new DisposalGuideline(1L, "Battery Disposal",
+                        "Instructions", testCategory)
+        );
+        when(guidelineRepository.findByTitleContainingIgnoreCase(keyword))
+                .thenReturn(expectedGuidelines);
+
+        List<DisposalGuideline> results = service.searchGuidelines(keyword);
+
+        assertEquals(1, results.size());
+        assertEquals("Battery Disposal", results.get(0).getTitle());
+        verify(guidelineRepository).findByTitleContainingIgnoreCase(keyword);
+    }
+
+    @Test
+    void testSearchGuidelinesWithEmptyKeyword() {
+        List<DisposalGuideline> allGuidelines = List.of(
+                new DisposalGuideline(1L, "Guideline 1",
+                        "Instructions 1", testCategory),
+                new DisposalGuideline(2L, "Guideline 2",
+                        "Instructions 2", testCategory)
+        );
+        when(guidelineRepository.findAll()).thenReturn(allGuidelines);
+
+        List<DisposalGuideline> results = service.searchGuidelines("");
+
+        assertEquals(2, results.size());
+        verify(guidelineRepository).findAll();
+        verify(guidelineRepository, never()).findByTitleContainingIgnoreCase(any());
+    }
 }

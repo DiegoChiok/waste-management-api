@@ -24,7 +24,6 @@ public class WasteCategory {
     @OneToMany(mappedBy = "category", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<RecyclingTip> recyclingTips;
 
-    // One category can have multiple disposal guidelines
     @OneToMany(mappedBy = "category", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<DisposalGuideline> guidelines;
 
@@ -99,6 +98,4 @@ public class WasteCategory {
                 ", description='" + description + '\'' +
                 '}';
     }
-
-
 }

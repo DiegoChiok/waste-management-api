@@ -174,4 +174,53 @@ class DisposalGuidelineControllerTest {
                 .andExpect(jsonPath("$.length()").value(1))
                 .andExpect(jsonPath("$[0].title").value("Battery Disposal"));
     }
+
+    @Test
+    @DisplayName("GET /guidelines/search - Should return guidelines matching search keyword")
+    void testSearchGuidelines() throws Exception {
+        String keyword = "battery";
+        List<DisposalGuideline> searchResults = List.of(
+                new DisposalGuideline(1L, "Battery Disposal",
+                        "Instructions for batteries", testCategory),
+                new DisposalGuideline(2L, "Car Battery Guidelines",
+                        "Car battery disposal steps", testCategory)
+        );
+        when(guidelineService.searchGuidelines(keyword)).thenReturn(searchResults);
+
+        mockMvc.perform(get("/wastemanagementapi/guidelines/search")
+                        .param("keyword", keyword))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.length()").value(2))
+                .andExpect(jsonPath("$[0].title").value("Battery Disposal"))
+                .andExpect(jsonPath("$[1].title").value("Car Battery Guidelines"));
+    }
+
+    @Test
+    @DisplayName("GET /guidelines/search - Should return all guidelines when keyword is empty")
+    void testSearchGuidelinesWithEmptyKeyword() throws Exception {
+        List<DisposalGuideline> allGuidelines = List.of(
+                new DisposalGuideline(1L, "Battery Disposal",
+                        "Instructions 1", testCategory),
+                new DisposalGuideline(2L, "Chemical Disposal",
+                        "Instructions 2", testCategory)
+        );
+        when(guidelineService.searchGuidelines("")).thenReturn(allGuidelines);
+
+        mockMvc.perform(get("/wastemanagementapi/guidelines/search")
+                        .param("keyword", ""))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.length()").value(2));
+    }
+
+    @Test
+    @DisplayName("GET /guidelines/search - Should return empty list when no matches found")
+    void testSearchGuidelinesNoMatches() throws Exception {
+        String keyword = "nonexistent";
+        when(guidelineService.searchGuidelines(keyword)).thenReturn(List.of());
+
+        mockMvc.perform(get("/wastemanagementapi/guidelines/search")
+                        .param("keyword", keyword))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.length()").value(0));
+    }
 }

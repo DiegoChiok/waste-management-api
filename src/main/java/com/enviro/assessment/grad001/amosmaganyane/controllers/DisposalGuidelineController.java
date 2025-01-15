@@ -161,4 +161,18 @@ public class DisposalGuidelineController {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
     }
+
+    @Operation(summary = "Search disposal guidelines",
+            description = "Search for disposal guidelines based on a keyword in their titles")
+    @ApiResponse(responseCode = "200", description = "Search results retrieved successfully")
+    @GetMapping("/guidelines/search")
+    public ResponseEntity<List<DisposalGuidelineDTO>> searchGuidelines(
+            @Parameter(description = "Keyword to search for in guideline titles")
+            @RequestParam(required = false) String keyword) {
+        List<DisposalGuidelineDTO> guidelineDTOs = guidelineService.searchGuidelines(keyword)
+                .stream()
+                .map(DisposalGuidelineDTO::fromEntity)
+                .collect(Collectors.toList());
+        return new ResponseEntity<>(guidelineDTOs, HttpStatus.OK);
+    }
 }
