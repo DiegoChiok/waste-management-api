@@ -109,11 +109,11 @@ class DisposalGuidelineServiceTest {
         DisposalGuideline updateRequest = new DisposalGuideline(guidelineId,
                 "Updated Title",
                 "Updated detailed instructions that meet the minimum length requirement",
-                null); // null category in request
+                null);
         DisposalGuideline expectedResult = new DisposalGuideline(guidelineId,
                 "Updated Title",
                 "Updated detailed instructions that meet the minimum length requirement",
-                testCategory); // preserved category
+                testCategory);
 
         when(guidelineRepository.findById(guidelineId))
                 .thenReturn(Optional.of(existingGuideline));
