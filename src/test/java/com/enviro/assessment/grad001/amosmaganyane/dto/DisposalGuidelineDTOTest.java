@@ -8,6 +8,9 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class DisposalGuidelineDTOTest {
 
+    /**
+     * Verifies the conversion of a DisposalGuideline entity to its corresponding DTO.
+     */
     @Test
     void testConvertEntityToDTO() {
         WasteCategory category = new WasteCategory(1L, "Hazardous", "Description");
@@ -23,6 +26,9 @@ class DisposalGuidelineDTOTest {
         assertEquals("Hazardous", dto.getCategoryName());
     }
 
+    /**
+     * Verifies exception handling when a null category is encountered during DTO conversion.
+     */
     @Test
     void testHandleNullCategory() {
         DisposalGuideline guideline = new DisposalGuideline(1L, "Title",

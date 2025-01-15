@@ -6,6 +6,10 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class WasteCategoryTest {
 
+
+    /**
+     * Verifies the creation of a WasteCategory object with valid data.
+     */
     @Test
     void testCreateWasteCategoryWithValidData(){
         WasteCategory category = new WasteCategory(5L,"Recyclable",
@@ -17,6 +21,9 @@ class WasteCategoryTest {
         assertTrue(category.getGuidelines().isEmpty());
     }
 
+    /**
+     * Verifies that WasteCategory objects with the same data are equal.
+     */
     @Test
     void testEqualWasteCategoriesShouldBeEqual() {
         WasteCategory category1 = new WasteCategory(1L, "Recyclable", "Description");
@@ -26,6 +33,9 @@ class WasteCategoryTest {
         assertEquals(category1.hashCode(), category2.hashCode());
     }
 
+    /**
+     * Verifies that WasteCategory objects with different data are not equal.
+     */
     @Test
     void testDifferentWasteCategoriesShouldNotBeEqual() {
         WasteCategory category1 = new WasteCategory(1L, "Recyclable", "Description");
@@ -35,6 +45,9 @@ class WasteCategoryTest {
         assertNotEquals(category1.hashCode(), category2.hashCode());
     }
 
+    /**
+     * Verifies the toString method of the WasteCategory class.
+     */
     @Test
     void testToString() {
         WasteCategory category = new WasteCategory(1L, "Recyclable", "Description");

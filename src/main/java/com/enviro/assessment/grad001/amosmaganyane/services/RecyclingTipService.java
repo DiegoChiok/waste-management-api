@@ -60,8 +60,28 @@ public interface RecyclingTipService {
     boolean isValidTipContent(String content);
 
     // Business operations
+    /**
+     * Retrieves all recycling tips associated with a specific waste category.
+     *
+     * @param categoryId the ID of the waste category
+     * @return a list of recycling tips for the specified category
+     */
     List<RecyclingTip> getTipsByCategory(Long categoryId);
+
+    /**
+     * Searches for recycling tips whose titles contain the given keyword (case-insensitive).
+     * If the keyword is null or empty, retrieves all recycling tips.
+     *
+     * @param keyword the keyword to search for in tip titles
+     * @return a list of recycling tips matching the keyword, or all tips if the keyword is empty
+     */
     List<RecyclingTip> searchTips(String keyword);
 
+    /**
+     * Counts the number of recycling tips associated with a specific waste category.
+     *
+     * @param categoryId the ID of the waste category
+     * @return the number of recycling tips in the specified category
+     */
     int countTipsInCategory(Long categoryId);
 }

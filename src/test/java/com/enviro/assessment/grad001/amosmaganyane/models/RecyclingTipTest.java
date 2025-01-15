@@ -5,6 +5,9 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class RecyclingTipTest {
 
+    /**
+     * Verifies the creation of a RecyclingTip object with valid data.
+     */
     @Test
     void testCreateRecyclingTipWithValidData() {
         WasteCategory category = new WasteCategory(1L, "Recyclable", "Description");
@@ -17,6 +20,9 @@ class RecyclingTipTest {
         assertEquals(category, tip.getCategory());
     }
 
+    /**
+     * Verifies that RecyclingTip objects with the same data are equal.
+     */
     @Test
     void testEqualRecyclingTipsShouldBeEqual() {
         WasteCategory category = new WasteCategory(1L, "Recyclable", "Description");
@@ -29,6 +35,9 @@ class RecyclingTipTest {
         assertEquals(tip1.hashCode(), tip2.hashCode());
     }
 
+    /**
+     * Verifies that RecyclingTip objects with different data are not equal.
+     */
     @Test
     void testDifferentRecyclingTipsShouldNotBeEqual() {
         WasteCategory category = new WasteCategory(1L, "Recyclable", "Description");
@@ -41,6 +50,9 @@ class RecyclingTipTest {
         assertNotEquals(tip1.hashCode(), tip2.hashCode());
     }
 
+    /**
+     * Verifies the toString method of the RecyclingTip class.
+     */
     @Test
     void testToString() {
         WasteCategory category = new WasteCategory(1L, "Recyclable", "Description");

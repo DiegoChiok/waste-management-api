@@ -99,7 +99,10 @@ public class RecyclingTipServiceImpl implements RecyclingTipService {
                 && content.length() <= 500;
     }
 
-
+    /**
+     * {@inheritDoc}
+     * Retrieves all recycling tips associated with a specific waste category.
+     */
     @Override
     public List<RecyclingTip> getTipsByCategory(Long categoryId) {
         return categoryRepository.findById(categoryId)
@@ -107,6 +110,11 @@ public class RecyclingTipServiceImpl implements RecyclingTipService {
                 .orElseThrow(() -> new IllegalArgumentException("Category not found"));
     }
 
+    /**
+     * {@inheritDoc}
+     * Searches for recycling tips whose titles contain the given keyword (case-insensitive).
+     * If the keyword is null or empty, retrieves all recycling tips.
+     */
     @Override
     public List<RecyclingTip> searchTips(String keyword) {
         if (keyword == null || keyword.trim().isEmpty()) {
@@ -115,6 +123,10 @@ public class RecyclingTipServiceImpl implements RecyclingTipService {
         return tipRepository.findByTitleContainingIgnoreCase(keyword);
     }
 
+    /**
+     * {@inheritDoc}
+     * Counts the number of recycling tips in a specific waste category.
+     */
     @Override
     public int countTipsInCategory(Long categoryId) {
         return getTipsByCategory(categoryId).size();

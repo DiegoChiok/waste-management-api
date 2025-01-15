@@ -48,6 +48,10 @@ public class WasteCategoryServiceImpl implements WasteCategoryService {
         return repository.findAll();
     }
 
+    /**
+     * {@inheritDoc}
+     * Updates an existing waste category by ID with new details.
+     */
     @Override
     public WasteCategory updateCategory(Long id, WasteCategory category) {
         return repository.findById(id)
@@ -96,7 +100,10 @@ public class WasteCategoryServiceImpl implements WasteCategoryService {
         return repository.findByNameContainingIgnoreCase(keyword);
     }
 
-    // Check if category has no guidelines or tips before deletion
+    /**
+     * {@inheritDoc}
+     * Deletes a category by ID using the repository's deleteById method.
+     */
     @Override
     public boolean canDeleteCategory(Long categoryId) {
         return countGuidelinesInCategory(categoryId) == 0
@@ -120,6 +127,10 @@ public class WasteCategoryServiceImpl implements WasteCategoryService {
                 && name.length() <= 50;
     }
 
+    /**
+     * {@inheritDoc}
+     * Retrieves all disposal guidelines associated with a specific category ID.
+     */
     @Override
     public List<DisposalGuideline> getGuidelinesForCategory(Long categoryId) {
         return repository.findById(categoryId)
@@ -127,6 +138,10 @@ public class WasteCategoryServiceImpl implements WasteCategoryService {
                 .orElse(List.of());
     }
 
+    /**
+     * {@inheritDoc}
+     * Retrieves all recycling tips associated with a specific category ID.
+     */
     @Override
     public List<RecyclingTip> getRecyclingTipsForCategory(Long categoryId) {
         return repository.findById(categoryId)
@@ -134,19 +149,31 @@ public class WasteCategoryServiceImpl implements WasteCategoryService {
                 .orElse(List.of());
     }
 
+
+    /**
+     * {@inheritDoc}
+     * Counts the number of disposal guidelines associated with a specific category ID.
+     */
     @Override
     public int countGuidelinesInCategory(Long categoryId) {
         return getGuidelinesForCategory(categoryId).size();
     }
 
+    /**
+     * {@inheritDoc}
+     * Counts the number of recycling tips associated with a specific category ID.
+     */
     @Override
     public int countRecyclingTipsInCategory(Long categoryId) {
         return getRecyclingTipsForCategory(categoryId).size();
     }
 
+    /**
+     * {@inheritDoc}
+     * Retrieves a limited list of categories with the most associated guidelines.
+     */
     @Override
     public List<WasteCategory> getCategoriesWithMostGuidelines(int limit) {
-        // Implementation would need a custom repository method
         return repository.findTopCategoriesByGuidelineCount(limit);
     }
 

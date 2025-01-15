@@ -8,6 +8,9 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class RecyclingTipDTOTest {
 
+    /**
+     * Verifies the conversion of a RecyclingTip entity to its corresponding DTO.
+     */
     @Test
     void testConvertEntityToDTO() {
         WasteCategory category = new WasteCategory(1L, "Recyclable", "Description");
@@ -23,6 +26,9 @@ class RecyclingTipDTOTest {
         assertEquals("Recyclable", dto.getCategoryName());
     }
 
+    /**
+     * Verifies exception handling when a null category is encountered during DTO conversion.
+     */
     @Test
     void testHandleNullCategory() {
         RecyclingTip tip = new RecyclingTip(1L, "Title", "Content", null);

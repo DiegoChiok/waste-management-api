@@ -5,9 +5,19 @@ import io.swagger.v3.oas.models.info.Info;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
+/**
+ * Configuration class which provides the configurations for
+ * generating Swagger documentation.
+ */
 @Configuration
 public class OpenApiConfig {
 
+
+    /**
+     * Creates an OpenAPI configuration bean for the Waste Management API.
+     *
+     * @return an OpenAPI instance
+     */
     @Bean
     public OpenAPI usersMicroserviceOpenAPI() {
         return new OpenAPI()

@@ -101,6 +101,10 @@ public class DisposalGuidelineServiceImpl implements DisposalGuidelineService {
                 && instructions.length() <= 1000;
     }
 
+    /**
+     * {@inheritDoc}
+     * Retrieves all disposal guidelines associated with a specific waste category.
+     */
     @Override
     public List<DisposalGuideline> getGuidelinesByCategory(Long categoryId) {
         return categoryRepository.findById(categoryId)
@@ -108,6 +112,13 @@ public class DisposalGuidelineServiceImpl implements DisposalGuidelineService {
                 .orElseThrow(() -> new IllegalArgumentException("Category not found"));
     }
 
+
+    /**
+     * {@inheritDoc}
+     * Searches for disposal guidelines whose titles or descriptions contain
+     * the given keyword (case-insensitive).
+     * If the keyword is null or empty, retrieves all disposal guidelines.
+     */
     @Override
     public List<DisposalGuideline> searchGuidelines(String keyword) {
         if (keyword == null || keyword.trim().isEmpty()) {
@@ -116,6 +127,10 @@ public class DisposalGuidelineServiceImpl implements DisposalGuidelineService {
         return guidelineRepository.findByTitleContainingIgnoreCase(keyword);
     }
 
+    /**
+     * {@inheritDoc}
+     * Counts the number of disposal guidelines associated with a specific waste category.
+     */
     @Override
     public int countGuidelinesInCategory(Long categoryId) {
         return getGuidelinesByCategory(categoryId).size();

@@ -59,8 +59,28 @@ public interface DisposalGuidelineService {
     boolean isValidGuidelineInstructions(String instructions);
 
     // Business operations
+    /**
+     * Retrieves all disposal guidelines associated with a specific waste category.
+     *
+     * @param categoryId the ID of the waste category
+     * @return a list of disposal guidelines for the specified category
+     */
     List<DisposalGuideline> getGuidelinesByCategory(Long categoryId);
+
+    /**
+     * Searches for disposal guidelines whose titles or descriptions contain the given keyword (case-insensitive).
+     * If the keyword is null or empty, retrieves all disposal guidelines.
+     *
+     * @param keyword the keyword to search for in guideline titles or descriptions
+     * @return a list of disposal guidelines matching the keyword, or all guidelines if the keyword is empty
+     */
     List<DisposalGuideline> searchGuidelines(String keyword);
 
+    /**
+     * Counts the number of disposal guidelines associated with a specific waste category.
+     *
+     * @param categoryId the ID of the waste category
+     * @return the number of disposal guidelines in the specified category
+     */
     int countGuidelinesInCategory(Long categoryId);
 }

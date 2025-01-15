@@ -6,7 +6,11 @@ import com.enviro.assessment.grad001.amosmaganyane.models.WasteCategory;
 import java.util.List;
 import java.util.Optional;
 
-// Waste Category Service with basic CRUD operations
+
+/**
+ * WasteCategoryService interface defines the contract for managing waste categories,
+ * including CRUD operations, validation, and associated guidelines or tips management.
+ */
 public interface WasteCategoryService {
 
     /**
@@ -80,12 +84,45 @@ public interface WasteCategoryService {
     boolean isValidCategoryName(String name);
 
     // Guidelines and Tips Management
+    /**
+     * Retrieves all disposal guidelines associated with a specific waste category.
+     *
+     * @param categoryId the ID of the category
+     * @return a list of DisposalGuideline objects for the category
+     */
     List<DisposalGuideline> getGuidelinesForCategory(Long categoryId);
+
+    /**
+     * Retrieves all disposal guidelines associated with a specific waste category.
+     *
+     * @param categoryId the ID of the category
+     * @return a list of DisposalGuideline objects for the category
+     */
     List<RecyclingTip> getRecyclingTipsForCategory(Long categoryId);
 
     // Statistics and Reporting
+    /**
+     * Counts the number of disposal guidelines in a specific category.
+     *
+     * @param categoryId the ID of the category
+     * @return the number of guidelines in the category
+     */
     int countGuidelinesInCategory(Long categoryId);
+
+    /**
+     * Counts the number of recycling tips in a specific category.
+     *
+     * @param categoryId the ID of the category
+     * @return the number of recycling tips in the category
+     */
     int countRecyclingTipsInCategory(Long categoryId);
+
+    /**
+     * Retrieves a limited list of categories with the most associated guidelines.
+     *
+     * @param limit the maximum number of categories to retrieve
+     * @return a list of WasteCategory objects with the most guidelines
+     */
     List<WasteCategory> getCategoriesWithMostGuidelines(int limit);
 
 }

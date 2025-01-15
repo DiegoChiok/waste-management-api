@@ -5,6 +5,9 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class DisposalGuidelineTest {
 
+    /**
+     * Verifies the creation of a DisposalGuideline object with valid data.
+     */
     @Test
     void testCreateDisposalGuidelineWithValidData() {
         WasteCategory category = new WasteCategory(1L, "Recyclable", "Description");
@@ -17,6 +20,9 @@ class DisposalGuidelineTest {
         assertEquals(category, guideline.getCategory());
     }
 
+    /**
+     * Verifies that DisposalGuideline objects with the same data are equal.
+     */
     @Test
     void testEqualDisposalGuidelinesShouldBeEqual() {
         WasteCategory category = new WasteCategory(1L, "Recyclable", "Description");
@@ -29,6 +35,9 @@ class DisposalGuidelineTest {
         assertEquals(guideline1.hashCode(), guideline2.hashCode());
     }
 
+    /**
+     * Verifies that DisposalGuideline objects with different data are not equal.
+     */
     @Test
     void testDifferentDisposalGuidelinesShouldNotBeEqual() {
         WasteCategory category = new WasteCategory(1L, "Recyclable", "Description");
@@ -41,6 +50,9 @@ class DisposalGuidelineTest {
         assertNotEquals(guideline1.hashCode(), guideline2.hashCode());
     }
 
+    /**
+     * Verifies the toString method of the DisposalGuideline class.
+     */
     @Test
     void testToString() {
         WasteCategory category = new WasteCategory(1L, "Recyclable", "Description");
