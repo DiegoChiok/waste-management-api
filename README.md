@@ -134,6 +134,7 @@ Once the application is running, access the Swagger UI documentation at:
 | GET         | /wastemanagementapi/tips/{id}                             | Get specific tip               |
 | PUT         | /wastemanagementapi/tips/{id}                             | Update tip                     |
 | DELETE      | /wastemanagementapi/tips/{id}                             | Delete tip                     |
+| GET         | /wastemanagementapi/tips/search                           | Search tip                     |
 
 #### Disposal Guidelines
 
@@ -144,7 +145,7 @@ Once the application is running, access the Swagger UI documentation at:
 | GET         | /wastemanagementapi/guidelines/{id}                       | Get specific guideline         |
 | PUT         | /wastemanagementapi/guidelines/{id}                       | Update guideline               |
 | DELETE      | /wastemanagementapi/guidelines/{id}                       | Delete guideline               |
-
+| GET         | /wastemanagementapi/guidelines/search                     | Search guideline               |
 
 
 ## API Documentation & Examples
@@ -159,7 +160,7 @@ GET /wastemanagementapi/categories
 ```
 
 
-##### Response:
+##### Response Example:
 
 ```json
 [
@@ -185,7 +186,7 @@ GET /wastemanagementapi/categories
 GET /wastemanagementapi/categories/{id}
 ```
 
-##### Response:
+##### Response Example:
 
 ```json
 {
@@ -203,7 +204,7 @@ GET /wastemanagementapi/categories/{id}
 POST /wastemanagementapi/categories
 ```
 
-##### Request Body:
+##### Request Body Example:
 
 ```json
 {
@@ -212,7 +213,7 @@ POST /wastemanagementapi/categories
 }
 ```
 
-##### Response:
+##### Response Example:
 ```json
 {
   "id": 1,
@@ -229,7 +230,7 @@ POST /wastemanagementapi/categories
 PUT /wastemanagementapi/categories/{id}
 ```
 
-##### Request body: 
+##### Request body Example: 
 
 ```json
 {
@@ -254,7 +255,7 @@ GET /wastemanagementapi/categories/search?keyword={keyword}
 Query Parameters:
 - `keyword` (optional): Search term for category names
 
-##### Response:
+##### Response Example:
 
 ```json
 [
@@ -276,7 +277,7 @@ Query Parameters:
 GET /wastemanagementapi/categories/{categoryId}/tips
 ```
 
-##### Response:
+##### Response Example:
 
 ```json
 [
@@ -294,7 +295,7 @@ GET /wastemanagementapi/categories/{categoryId}/tips
 ```http
 POST /wastemanagementapi/categories/{categoryId}/tips
 ```
-##### Request Body:
+##### Request Body Example:
 ```json
 
 {
@@ -307,7 +308,7 @@ POST /wastemanagementapi/categories/{categoryId}/tips
 ```http
 PUT /wastemanagementapi/tips/{id}
 ```
-##### Request Body:
+##### Request Body Example:
 ```json
 {
   "title": "Updated Title",
@@ -323,7 +324,7 @@ PUT /wastemanagementapi/tips/{id}
 GET /wastemanagementapi/categories/{categoryId}/guidelines
 ```
 
-##### Response:
+##### Response Example:
 
 ```json
 [
@@ -343,7 +344,7 @@ GET /wastemanagementapi/categories/{categoryId}/guidelines
 POST /wastemanagementapi/categories/{categoryId}/guidelines
 ```
 
-##### Request Body:
+##### Request Body Example:
 
 ```json
 {
@@ -358,7 +359,7 @@ POST /wastemanagementapi/categories/{categoryId}/guidelines
 PUT /wastemanagementapi/guidelines/{id}
 ```
 
-##### Request Body:
+##### Request Body Example:
 
 ```json
 {
@@ -376,8 +377,9 @@ The API uses standard HTTP status codes:
 - 400: Bad Request
 - 404: Not Found
 - 500: Internal Server Error
-Error Response Format:
 
+  
+Error Response Format:
 
 ```json
 {
@@ -421,6 +423,6 @@ This project is not open for contributions, although feedback is welcome.
 
 ## Contact
 Amos Maganyane
--- kmaganyane83@gmail.com
+--> kmaganyane83@gmail.com
  
    
