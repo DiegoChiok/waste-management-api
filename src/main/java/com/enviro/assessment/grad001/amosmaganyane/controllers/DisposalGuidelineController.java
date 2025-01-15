@@ -158,23 +158,4 @@ public class DisposalGuidelineController {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
     }
-
-    @Operation(summary = "Get guidelines count for a category",
-            description = "Returns the number of disposal guidelines associated with a category")
-    @ApiResponses(value = {
-            @ApiResponse(responseCode = "200", description = "Count retrieved successfully"),
-            @ApiResponse(responseCode = "404", description = "Category not found")
-    })
-    @GetMapping("/categories/{categoryId}/guidelines/count")
-    public ResponseEntity<Integer> getGuidelinesCount(
-            @Parameter(description = "ID of the category")
-            @PathVariable Long categoryId) {
-        try {
-            int count = guidelineService.countGuidelinesInCategory(categoryId);
-            return new ResponseEntity<>(count, HttpStatus.OK);
-        } catch (IllegalArgumentException e) {
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-        }
-    }
-
 }

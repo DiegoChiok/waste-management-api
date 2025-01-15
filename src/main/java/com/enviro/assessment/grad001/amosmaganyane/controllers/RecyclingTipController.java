@@ -160,22 +160,4 @@ public class RecyclingTipController {
         }
     }
 
-    @Operation(summary = "Get tips count for a category",
-            description = "Returns the number of recycling tips associated with a category")
-    @ApiResponses(value = {
-            @ApiResponse(responseCode = "200", description = "Count retrieved successfully"),
-            @ApiResponse(responseCode = "404", description = "Category not found")
-    })
-    @GetMapping("/categories/{categoryId}/tips/count")
-    public ResponseEntity<Integer> getTipsCount(
-            @Parameter(description = "ID of the category")
-            @PathVariable Long categoryId)
-     {
-        try {
-            int count = tipService.countTipsInCategory(categoryId);
-            return new ResponseEntity<>(count, HttpStatus.OK);
-        } catch (IllegalArgumentException e) {
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-        }
-    }
 }
