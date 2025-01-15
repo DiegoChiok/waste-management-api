@@ -66,10 +66,9 @@ public class RecyclingTipServiceImpl implements RecyclingTipService {
     public RecyclingTip updateTip(Long id, RecyclingTip tip) {
         return tipRepository.findById(id)
                 .map(existingTip -> {
-                    // Update fields but preserve the category
                     existingTip.setTitle(tip.getTitle());
                     existingTip.setContent(tip.getContent());
-                    // Category remains the same
+
                     return tipRepository.save(existingTip);
                 })
                 .orElseThrow(() -> new IllegalStateException("Tip not found"));

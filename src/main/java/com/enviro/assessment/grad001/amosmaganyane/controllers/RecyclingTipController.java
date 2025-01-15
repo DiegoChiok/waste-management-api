@@ -161,4 +161,17 @@ public class RecyclingTipController {
         }
     }
 
+    @Operation(summary = "Search recycling tips",
+            description = "Search for recycling tips based on a keyword in their titles")
+    @ApiResponse(responseCode = "200", description = "Search results retrieved successfully")
+    @GetMapping("/tips/search")
+    public ResponseEntity<List<RecyclingTipDTO>> searchTips(
+            @Parameter(description = "Keyword to search for in tip titles")
+            @RequestParam(required = false) String keyword) {
+        List<RecyclingTipDTO> tipDTOs = tipService.searchTips(keyword)
+                .stream()
+                .map(RecyclingTipDTO::fromEntity)
+                .collect(Collectors.toList());
+        return new ResponseEntity<>(tipDTOs, HttpStatus.OK);
+    }
 }

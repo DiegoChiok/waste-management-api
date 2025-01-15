@@ -172,4 +172,49 @@ class RecyclingTipControllerTest {
                 .andExpect(jsonPath("$[0].title").value("Paper Recycling"));
     }
 
+    @Test
+    @DisplayName("GET /tips/search - Should return tips matching search keyword")
+    void testSearchTips() throws Exception {
+        String keyword = "paper";
+        List<RecyclingTip> searchResults = List.of(
+                new RecyclingTip(1L, "Paper Recycling", "Content about paper", testCategory),
+                new RecyclingTip(2L, "Newspaper Disposal", "How to recycle newspaper", testCategory)
+        );
+        when(tipService.searchTips(keyword)).thenReturn(searchResults);
+
+        mockMvc.perform(get("/wastemanagementapi/tips/search")
+                        .param("keyword", keyword))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.length()").value(2))
+                .andExpect(jsonPath("$[0].title").value("Paper Recycling"))
+                .andExpect(jsonPath("$[1].title").value("Newspaper Disposal"));
+    }
+
+    @Test
+    @DisplayName("GET /tips/search - Should return all tips when keyword is empty")
+    void testSearchTipsWithEmptyKeyword() throws Exception {
+        List<RecyclingTip> allTips = List.of(
+                new RecyclingTip(1L, "Paper Recycling", "Content 1", testCategory),
+                new RecyclingTip(2L, "Glass Recycling", "Content 2", testCategory)
+        );
+        when(tipService.searchTips("")).thenReturn(allTips);
+
+        mockMvc.perform(get("/wastemanagementapi/tips/search")
+                        .param("keyword", ""))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.length()").value(2));
+    }
+
+    @Test
+    @DisplayName("GET /tips/search - Should return empty list when no matches found")
+    void testSearchTipsNoMatches() throws Exception {
+        String keyword = "nonexistent";
+        when(tipService.searchTips(keyword)).thenReturn(List.of());
+
+        mockMvc.perform(get("/wastemanagementapi/tips/search")
+                        .param("keyword", keyword))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.length()").value(0));
+    }
+
 }

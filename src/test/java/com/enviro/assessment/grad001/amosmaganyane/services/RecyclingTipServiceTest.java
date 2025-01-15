@@ -203,4 +203,50 @@ class RecyclingTipServiceTest {
 
         assertEquals(2, count);
     }
+
+    @Test
+    void testSearchTipsWithKeyword() {
+        String keyword = "paper";
+        List<RecyclingTip> expectedTips = List.of(
+                new RecyclingTip(1L, "Paper Recycling", "Content", testCategory)
+        );
+        when(tipRepository.findByTitleContainingIgnoreCase(keyword))
+                .thenReturn(expectedTips);
+
+        List<RecyclingTip> results = service.searchTips(keyword);
+
+        assertEquals(1, results.size());
+        assertEquals("Paper Recycling", results.get(0).getTitle());
+        verify(tipRepository).findByTitleContainingIgnoreCase(keyword);
+    }
+
+    @Test
+    void testSearchTipsWithEmptyKeyword() {
+        List<RecyclingTip> allTips = List.of(
+                new RecyclingTip(1L, "Tip 1", "Content 1", testCategory),
+                new RecyclingTip(2L, "Tip 2", "Content 2", testCategory)
+        );
+        when(tipRepository.findAll()).thenReturn(allTips);
+
+        List<RecyclingTip> results = service.searchTips("");
+
+        assertEquals(2, results.size());
+        verify(tipRepository).findAll();
+        verify(tipRepository, never()).findByTitleContainingIgnoreCase(any());
+    }
+
+    @Test
+    void testSearchTipsWithNullKeyword() {
+        List<RecyclingTip> allTips = List.of(
+                new RecyclingTip(1L, "Tip 1", "Content 1", testCategory),
+                new RecyclingTip(2L, "Tip 2", "Content 2", testCategory)
+        );
+        when(tipRepository.findAll()).thenReturn(allTips);
+
+        List<RecyclingTip> results = service.searchTips(null);
+
+        assertEquals(2, results.size());
+        verify(tipRepository).findAll();
+        verify(tipRepository, never()).findByTitleContainingIgnoreCase(any());
+    }
 }
