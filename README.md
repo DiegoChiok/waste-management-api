@@ -25,7 +25,7 @@ The API allows users to:
 
 ### Prerequisites
 - Java JDK 17 or higher
-- Maven 3.x.x versions 
+- Maven 3 versions 
 
 
 ### Build Instructions
