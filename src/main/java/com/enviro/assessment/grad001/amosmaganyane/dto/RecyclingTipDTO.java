@@ -26,6 +26,7 @@ public class RecyclingTipDTO {
             description = "Name of the waste category this tip belongs to")
     private String categoryName;
 
+
     public RecyclingTipDTO() {}
 
     public RecyclingTipDTO(Long id, String title, String content,

@@ -29,7 +29,6 @@ public class DisposalGuidelineDTO {
 
     public DisposalGuidelineDTO() {}
 
-    // Constructor with fields
     public DisposalGuidelineDTO(Long id, String title, String instructions,
                                 Long categoryId, String categoryName) {
         this.id = id;
