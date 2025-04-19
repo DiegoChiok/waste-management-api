@@ -1,5 +1,8 @@
 name,description
-Recyclable Materials,"Items that can be processed and reused, including paper, cardboard, glass, certain plastics, and metals"
+Recyclable Paper,"Items that can be processed and reused (Paper)"
+Recyclable Plastic,"Items that can be processed and reused (Plastic)"
+Recyclable Glass,"Items that can be processed and reused (Glass)"
+Recyclable Metal,"Items that can be processed and reused (Metal)"
 Hazardous Waste,"Materials that pose a risk to human health or the environment and require special handling and disposal, including certain chemicals, medical waste, and some e-waste"
 Organic Waste,"Biodegradable materials of plant or animal origin, including food scraps and garden waste"
 Electronic Waste,"Discarded electronic devices and components, often containing both valuable and hazardous materials"

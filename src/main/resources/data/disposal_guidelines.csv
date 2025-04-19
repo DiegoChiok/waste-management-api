@@ -1,8 +1,8 @@
 title,instructions,category_name
-"Paper Disposal","Place in designated paper recycling bins. Keep paper clean and dry. Support local recycling initiatives.","Recyclable Materials"
-"Plastic Disposal","Place in designated plastic recycling bins. Separate by type if required by your local recycling facility.","Recyclable Materials"
-"Glass Disposal","Place in designated glass recycling bins. Do not include broken glass.","Recyclable Materials"
-"Metal Disposal","Place in designated metal recycling bins or bring to a buy-back centre.","Recyclable Materials"
+"Paper Disposal","Place in designated paper recycling bins. Keep paper clean and dry. Support local recycling initiatives.","Recyclable Paper"
+"Plastic Disposal","Place in designated plastic recycling bins. Separate by type if required by your local recycling facility.","Recyclable Plastic"
+"Glass Disposal","Place in designated glass recycling bins. Do not include broken glass.","Recyclable Glass"
+"Metal Disposal","Place in designated metal recycling bins or bring to a buy-back centre.","Recyclable Metal"
 "Battery Disposal","Take to designated collection points. Never dispose of in regular rubbish bins.","Hazardous Waste"
 "Electronics Disposal","Return to manufacturer take-back programs or use certified e-waste collection centers. Ensure data is wiped from devices before disposal.","Electronic Waste"
 "Organic Waste Disposal","Use green bins where available or compost at home. Avoid mixing with non-organic waste.","Organic Waste"
